@@ -12,9 +12,9 @@ namespace SportsPromo.Dominio.Modelos
 
         public string CategoriaNome { get; set; }
 
-        public int IdadeMin { get; set; }
+        public int CategoriaIdadeMin { get; set; }
 
-        public int IdadeMax { get; set; }
+        public int CategoriaIdadeMax { get; set; }
 
         public int CategoriaGeneroId { get; set; }
 
