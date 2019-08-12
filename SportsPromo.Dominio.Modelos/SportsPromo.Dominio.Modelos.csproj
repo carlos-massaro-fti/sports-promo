@@ -44,12 +44,9 @@
   <ItemGroup>
     <Compile Include="Checagem.cs" />
     <Compile Include="Categoria.cs" />
-    <Compile Include="Equipe.cs" />
     <Compile Include="Esporte.cs" />
     <Compile Include="Evento.cs" />
     <Compile Include="Genero.cs" />
-    <Compile Include="Inscricao.cs" />
-    <Compile Include="Marco.cs" />
     <Compile Include="Mensagem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Prova.cs" />
