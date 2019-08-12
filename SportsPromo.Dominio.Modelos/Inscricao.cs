@@ -8,7 +8,7 @@ namespace SportsPromo.Dominio.Modelos
 {
     public class Inscricao
     {
-        public int InscricaoId { get; set; }
+        public long InscricaoId { get; set; }
 
         public string InscricaoNome { get; set; }
 
@@ -18,9 +18,9 @@ namespace SportsPromo.Dominio.Modelos
 
         public string InscricaoRFID { get; set; }
 
-        public int InscricaoEquipeId { get; set; }
+        public long InscricaoEquipeId { get; set; }
 
-        public int InscricaoGeneroId { get; set; }
+        public long InscricaoGeneroId { get; set; }
 
         //public Equipe Equipe { get; set; }
 

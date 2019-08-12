@@ -9,7 +9,7 @@ namespace SportsPromo.Dominio.Modelos
         [ForeignKey("Esporte")]
         public long EsporteId { get; set; }
         public DateTime ProvaComecaEm { get; set; }
-        public string Evento_Id { get; set; }
+        public string EventoId { get; set; }
         [ForeignKey("Evento")]
         public long ProvaEvento { get; set; }
     }
