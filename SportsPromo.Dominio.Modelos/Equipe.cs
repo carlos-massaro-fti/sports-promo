@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SportsPromo.Dominio.Modelos
 {
-    class Equipe
+     public class Equipe
     {
         public long EquipeID { get; set; }
         public string EquipeNome { get; set; }
