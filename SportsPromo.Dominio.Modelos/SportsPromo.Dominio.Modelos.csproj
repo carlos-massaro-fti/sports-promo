@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Esporte.cs" />
+    <Compile Include="Evento.cs" />
     <Compile Include="Genero.cs" />
     <Compile Include="Mensagem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
