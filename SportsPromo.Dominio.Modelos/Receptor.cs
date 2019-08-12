@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SportsPromo.Dominio.Modelos
 {
-    class Receptor
+    public class Receptor
     {
         public long ReceptorId { get; set; }
 
