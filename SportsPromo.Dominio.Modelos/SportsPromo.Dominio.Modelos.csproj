@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Checagem.cs" />
     <Compile Include="Categoria.cs" />
+    <Compile Include="Equipe.cs" />
     <Compile Include="Esporte.cs" />
     <Compile Include="Evento.cs" />
     <Compile Include="Genero.cs" />
