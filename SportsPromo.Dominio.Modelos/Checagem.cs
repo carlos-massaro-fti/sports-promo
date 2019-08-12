@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SportsPromo.Dominio.Modelos
 {
-    class Checagem
+    public class Checagem
     {
         public long ChecagemId { get; set; }
         [ForeignKey("ReceptorId")]
