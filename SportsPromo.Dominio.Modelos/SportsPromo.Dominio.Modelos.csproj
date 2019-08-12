@@ -56,5 +56,8 @@
     <Compile Include="Receptor.cs" />
     <Compile Include="Usuario.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="DiagramaDeClasses.cd" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
