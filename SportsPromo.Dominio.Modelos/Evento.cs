@@ -12,7 +12,7 @@ namespace SportsPromo.Dominio.Modelos
     public class Evento
     {
         [Required]
-        public int EventoId { get; set; }
+        public long EventoId { get; set; }
         public string EventoLocal { get; set; }
         public DateTime EventoDataNascimento { get; set; }
         public DateTime EventoDataFinal { get; set; }
