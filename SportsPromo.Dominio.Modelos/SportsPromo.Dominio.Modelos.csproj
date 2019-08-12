@@ -46,6 +46,7 @@
     <Compile Include="Genero.cs" />
     <Compile Include="Mensagem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Receptor.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
