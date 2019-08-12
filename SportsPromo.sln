@@ -19,6 +19,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportsPromo.Testes", "Sport
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportsPromo.Dados", "SportsPromo.Dados\SportsPromo.Dados.csproj", "{41404BEA-7AC3-4941-8D58-858CE89A19E8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DER", "DER", "{BE1E1D2D-FBFA-4935-8BBC-5684A1EF0C4F}"
+	ProjectSection(SolutionItems) = preProject
+		SPORTS_PROMO.mwb = SPORTS_PROMO.mwb
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
