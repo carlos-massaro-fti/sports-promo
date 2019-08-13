@@ -1,4 +1,5 @@
-﻿using SportsPromo.Dominio.Modelos;
+﻿using SportsPromo.Dados.Mapeamento;
+using SportsPromo.Dominio.Modelos;
 using SportsPromo.Interfaces.Dados.Contextos;
 using System;
 using System.Collections.Generic;
@@ -19,15 +20,19 @@ namespace SportsPromo.Dados.Contextos
 
         public DbSet<Genero> Generos { get; set; }
 
-        /*public void OnModelCreating(DbModelBuilder modelBuilder)
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Types<Genero>().Configure(e =>
-            {
-                e.ToTable("");
-                e.Property(x => x.GeneroId).HasColumnName("GENERO_ID");
 
-            });
+            modelBuilder.Configurations.Add(new GeneroMapa());
+            modelBuilder.Configurations.Add(new EsporteMapa());
 
-        }*/
+            //modelBuilder.Types<Genero>().Configure(e =>
+            //{
+            //    e.ToTable("");
+            //    e.Property(x => x.GeneroId).HasColumnName("GENERO_ID");
+
+            //});
+
+        }
     }
 }

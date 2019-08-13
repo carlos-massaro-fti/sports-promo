@@ -12,7 +12,7 @@ namespace SportsPromo.Dominio.Modelos
     [Table("GENERO")]
     public class Genero
     {
-        [Column("GENERO_ID")]
+        //[Column("GENERO_ID")]
         [Key()]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long GeneroId { get; set; }
