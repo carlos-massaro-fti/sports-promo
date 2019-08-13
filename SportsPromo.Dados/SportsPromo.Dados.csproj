@@ -49,9 +49,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contextos\SportsPromoContexto.cs" />
+    <Compile Include="Mapeamento\EsporteMapa.cs" />
+    <Compile Include="Mapeamento\GeneroMapa.cs" />
     <Compile Include="Migrations\201908092325162_Inicial.cs" />
     <Compile Include="Migrations\201908092325162_Inicial.Designer.cs">
       <DependentUpon>201908092325162_Inicial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908130005433_Nova.cs" />
+    <Compile Include="Migrations\201908130005433_Nova.Designer.cs">
+      <DependentUpon>201908130005433_Nova.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -73,6 +79,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201908092325162_Inicial.resx">
       <DependentUpon>201908092325162_Inicial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908130005433_Nova.resx">
+      <DependentUpon>201908130005433_Nova.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

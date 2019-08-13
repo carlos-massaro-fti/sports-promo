@@ -58,6 +58,13 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="DiagramaDeClasses.cd" />
+    <None Include="obj\Debug\DesignTimeResolveAssemblyReferencesInput.cache" />
+    <None Include="obj\Debug\SportsPromo.Dominio.Modelos.csproj.CoreCompileInputs.cache" />
+    <None Include="obj\Debug\SportsPromo.Dominio.Modelos.csprojAssemblyReference.cache" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Debug\" />
+    <Folder Include="obj\Debug\TempPE\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
