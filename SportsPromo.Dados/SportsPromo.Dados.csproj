@@ -52,6 +52,7 @@
     <Compile Include="Mapeamento\EsporteMapa.cs" />
     <Compile Include="Mapeamento\GeneroMapa.cs" />
     <Compile Include="Mapeamento\InscricaoMapa.cs" />
+    <Compile Include="Mapeamento\EventoMapa.cs" />
     <Compile Include="Mapeamento\UsuarioMapa.cs" />
     <Compile Include="Mapeamento\ReceptorMapa.cs" />
     <Compile Include="Migrations\201908092325162_Inicial.cs" />

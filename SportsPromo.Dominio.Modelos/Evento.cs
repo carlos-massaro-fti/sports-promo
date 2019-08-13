@@ -13,8 +13,13 @@ namespace SportsPromo.Dominio.Modelos
     {
         [Required]
         public long EventoId { get; set; }
+
         public string EventoLocal { get; set; }
+
         public DateTime EventoDataInicio{ get; set; }
+
         public DateTime EventoDataFinal { get; set; }
+
+        public virtual List<Prova> Provas { get; set; }
     }
 }
