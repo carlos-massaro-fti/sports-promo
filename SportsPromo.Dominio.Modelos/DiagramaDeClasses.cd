@@ -31,7 +31,7 @@
   <Class Name="SportsPromo.Dominio.Modelos.Evento">
     <Position X="2.25" Y="3.25" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAEAAAAAAGAAAgAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AABAAAAAAAAAAAAAAABAAAAAAAQAAgAAAAAAAAAAAAA=</HashCode>
       <FileName>Evento.cs</FileName>
     </TypeIdentifier>
   </Class>

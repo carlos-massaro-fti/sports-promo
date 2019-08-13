@@ -10,10 +10,13 @@ namespace SportsPromo.Dominio.Modelos
     public class Checagem
     {
         public long ChecagemId { get; set; }
-        [ForeignKey("Receptor")]
+
         public long ChecagemReceptorId { get; set; }
-        public Receptor Receptor { get; set; }
+
+        public virtual Receptor Receptor { get; set; }
+
         public string ChecagemEm { get; set; }
+
         public string ChecagemRfid { get; set; }
     }
 }

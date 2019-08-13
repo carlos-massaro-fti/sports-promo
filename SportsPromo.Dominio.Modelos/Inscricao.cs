@@ -22,7 +22,7 @@ namespace SportsPromo.Dominio.Modelos
 
         public long InscricaoGeneroId { get; set; }
 
-        //public Equipe Equipe { get; set; }
+        public Equipe Equipe { get; set; }
 
         public Genero Genero { get; set; }
     }

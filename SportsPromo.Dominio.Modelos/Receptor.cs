@@ -11,5 +11,9 @@ namespace SportsPromo.Dominio.Modelos
         public long ReceptorId { get; set; }
 
         public string ReceptorCodigo { get; set; }
+
+        public virtual List<Marco> Marcos { get; set; }
+
+        public virtual List<Checagem> Checagens { get; set; }
     }
 }

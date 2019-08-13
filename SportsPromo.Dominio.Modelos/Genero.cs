@@ -9,15 +9,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SportsPromo.Dominio.Modelos
 {
-    [Table("GENERO")]
     public class Genero
     {
-        //[Column("GENERO_ID")]
-        [Key()]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long GeneroId { get; set; }
 
-        [Column("GENERO_NOME")]
         public string GeneroNome { get; set; }
+
+        public virtual List<Inscricao> Inscricoes { get; set; }
     }
 }
