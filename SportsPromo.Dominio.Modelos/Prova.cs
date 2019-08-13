@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SportsPromo.Dominio.Modelos
@@ -12,5 +13,7 @@ namespace SportsPromo.Dominio.Modelos
         public string EventoId { get; set; }
         [ForeignKey("Evento")]
         public long ProvaEvento { get; set; }
+
+        public virtual List<Equipe> Equipes { get; set; }
     }
 }
