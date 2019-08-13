@@ -25,6 +25,7 @@ namespace SportsPromo.Dados.Contextos
 
             modelBuilder.Configurations.Add(new GeneroMapa());
             modelBuilder.Configurations.Add(new EsporteMapa());
+            modelBuilder.Configurations.Add(new ProvaMapa());
 
             //modelBuilder.Types<Genero>().Configure(e =>
             //{
