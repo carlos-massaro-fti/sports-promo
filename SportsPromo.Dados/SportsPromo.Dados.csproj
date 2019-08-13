@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contextos\SportsPromoContexto.cs" />
+    <Compile Include="Mapeamento\ChecagemMapa.cs" />
     <Compile Include="Mapeamento\EsporteMapa.cs" />
     <Compile Include="Mapeamento\GeneroMapa.cs" />
     <Compile Include="Migrations\201908092325162_Inicial.cs" />
