@@ -8,7 +8,7 @@ namespace SportsPromo.Dominio.Modelos
 {
     public class Usuario
     {
-        public int UsuarioId { get; set; }
+        public long UsuarioId { get; set; }
 
         public string UsuarioNome { get; set; }
 
