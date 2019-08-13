@@ -53,8 +53,10 @@
     <Compile Include="Mapeamento\ChecagemMapa.cs" />
     <Compile Include="Mapeamento\EquipeMapa.cs" />
     <Compile Include="Mapeamento\EsporteMapa.cs" />
+    <Compile Include="Mapeamento\EventoMapa.cs" />
     <Compile Include="Mapeamento\GeneroMapa.cs" />
     <Compile Include="Mapeamento\InscricaoMapa.cs" />
+    <Compile Include="Mapeamento\ProvaMapa.cs" />
     <Compile Include="Mapeamento\UsuarioMapa.cs" />
     <Compile Include="Mapeamento\ReceptorMapa.cs" />
     <Compile Include="Mapeamento\MarcoMapa.cs" />
