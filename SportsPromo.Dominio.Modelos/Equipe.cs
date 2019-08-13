@@ -9,11 +9,10 @@ namespace SportsPromo.Dominio.Modelos
 {
      public class Equipe
     {
-        public long EquipeID { get; set; }
+        public long EquipeId { get; set; }
         public string EquipeNome { get; set; }
-        [ForeignKey("ProvaID")]
-        public long EquipeProvaID { get; set; }
-        public Prova ProvaID { get; set; }
+        public long EquipeProvaId { get; set; }
+        public Prova Prova { get; set; }
 
         public virtual List<Inscricao> Inscricoes { get; set; }
 
