@@ -3,28 +3,29 @@
   <Class Name="SportsPromo.Dominio.Modelos.Categoria">
     <Position X="0.5" Y="0.5" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AACAAAAAAAAAACAAAAAAAAIAAAAAAAgAACAAAAAAAEA=</HashCode>
+      <HashCode>AACAAAAAAAAAAAAQAAAAAAIAAAAAAAgAAEAAAAAAAEA=</HashCode>
       <FileName>Categoria.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SportsPromo.Dominio.Modelos.Checagem">
     <Position X="2.5" Y="0.5" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAACBAAAAAAAAAAAAAAABEAAAAAAAAAAAAgAAAA=</HashCode>
+      <HashCode>AAAAAAACBAAAAAAAAAAAAAAABEAAAAAAAAAAAgAAAAA=</HashCode>
       <FileName>Checagem.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SportsPromo.Dominio.Modelos.Equipe">
     <Position X="4.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAgQAAAAAAAAAACAQAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAgAAAAAAIAAAAAAAAAAEABAAACAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAgAAAAAAAAAAAgQAAAAAAAAAACAQAAAAAAAAA=</HashCode>
       <FileName>Equipe.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="SportsPromo.Dominio.Modelos.Esporte">
     <Position X="6" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <HashCode>AAAEAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
       <FileName>Esporte.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -52,7 +53,7 @@
   <Class Name="SportsPromo.Dominio.Modelos.Marco">
     <Position X="8.25" Y="2.5" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAIAAAAAAAAAAAJAAAAAAAAAKgAIAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAIAAAAAAEAAAAIAAAAAAAAAKgAIAAA=</HashCode>
       <FileName>Marco.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -63,7 +64,7 @@
       <FileName>Mensagem.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SportsPromo.Dominio.Modelos.Prova">
+  <Class Name="SportsPromo.Dominio.Modelos.ProvaTemCategoria">
     <Position X="0.5" Y="4.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
@@ -82,6 +83,13 @@
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAIAAAAAAAAAAAAEAIAAAAAAAAAAQAAAIAA=</HashCode>
       <FileName>Usuario.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SportsPromo.Dominio.Modelos.Receptor">
+    <Position X="6.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAAAAAAAAAQAAAAAAAAAAABAAAgAAAA=</HashCode>
+      <FileName>Receptor.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

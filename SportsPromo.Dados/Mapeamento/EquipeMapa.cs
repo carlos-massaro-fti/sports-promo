@@ -30,6 +30,6 @@ namespace SportsPromo.Dados.Mapeamento
                 .WithMany(e => e.Equipes)
                 .HasForeignKey(e => e.EquipeProvaId)
                 .WillCascadeOnDelete(false);
-    }
+        }
     }
 }
