@@ -13,7 +13,7 @@ namespace SportsPromo.Dados.Mapeamento
     {
         public EquipeMapa()
         {
-            ToTable("Equipe");
+            ToTable("EQUIPE");
 
             HasKey(e => e.EquipeId);
 
