@@ -30,11 +30,25 @@ namespace SportsPromo.Dados.Mapeamento
                 .HasForeignKey(e => e.ProvaEsporteId)
                 .WillCascadeOnDelete(false);
 
+            HasRequired(e => e.Evento)
+                .WithMany(e => e.Provas)
+                .HasForeignKey(e => e.ProvaEventoId)
+                .WillCascadeOnDelete(false);
+
             HasMany(e => e.Marcos)
                 .WithRequired(e => e.Prova)
                 .HasForeignKey(e => e.MarcoProvaId)
                 .WillCascadeOnDelete(false);
 
+            HasMany(e => e.Equipes)
+                .WithRequired(e => e.Prova)
+                .HasForeignKey(e => e.EquipeProvaId)
+                .WillCascadeOnDelete(false);
+
+            HasMany(e => e.ProvaTemCategorias)
+                .WithRequired(e => e.Prova)
+                .HasForeignKey(e => e.ProvaCategoriaId)
+                .WillCascadeOnDelete(false);
         }
     }
 }
