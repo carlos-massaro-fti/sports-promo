@@ -36,11 +36,11 @@ namespace SportsPromo.Dados.Mapeamento
                 .IsRequired();
 
             Property(e => e.InscricaoEquipeId)
-               .HasColumnName("INSCRICAO_NASCIMENTO")
+               .HasColumnName("INSCRICAO_EQUIPE_ID")
                .IsRequired();
 
             Property(e => e.InscricaoGeneroId)
-               .HasColumnName("INSCRICAO_NASCIMENTO")
+               .HasColumnName("INSCRICAO_GENERO_ID")
                .IsRequired();
 
             Property(e => e.InscricaoRFID)

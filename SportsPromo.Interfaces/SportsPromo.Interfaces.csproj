@@ -49,7 +49,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dados\Contextos\ISportsPromoContexto.cs" />
+    <Compile Include="Dados\Repositorios\IEsporteRepositorio.cs" />
     <Compile Include="Dados\Repositorios\IGeneroRepositorio.cs" />
+    <Compile Include="Dominio\Servicos\IEsporteServico.cs" />
     <Compile Include="Dominio\Servicos\IGeneroServico.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

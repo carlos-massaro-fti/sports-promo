@@ -1,8 +1,10 @@
-﻿using SportsPromo.Dominio.Modelos;
+﻿using SportsPromo.Comum.Exceptions;
+using SportsPromo.Dominio.Modelos;
 using SportsPromo.Interfaces.Dados.Repositorios;
 using SportsPromo.Interfaces.Dominio.Servicos;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +13,7 @@ namespace SportsPromo.Dominio.Servicos
 {
     public class GeneroServico : IGeneroServico
     {
-        protected IGeneroRepositorio GeneroRepositorio { get; }
+        public IGeneroRepositorio GeneroRepositorio { get; }
 
         public GeneroServico(IGeneroRepositorio generoRepositorio)
         {
@@ -19,6 +21,13 @@ namespace SportsPromo.Dominio.Servicos
         }
         public long Adicionar(Genero instancia)
         {
+            var validationResult = Validar(instancia);
+
+            if (validationResult.Any())
+            {
+                throw new AppException(validationResult.First().ErrorMessage, validationResult);
+            }
+
             var result = GeneroRepositorio.Adicionar(instancia);
 
             return result;
@@ -50,6 +59,18 @@ namespace SportsPromo.Dominio.Servicos
             var result = GeneroRepositorio.Pegar(id);
 
             return result;
+        }
+
+        public IEnumerable<ValidationResult> Validar(Genero instancia)
+        {
+            if (instancia.GeneroNome.Length > 256)
+            {
+                yield return new ValidationResult("O nome não pode ter mais de 256 caracteres");
+            }
+            if (instancia.GeneroNome.Length < 3)
+            {
+                yield return new ValidationResult("O nome não pode ter menos de 3 caracteres");
+            }
         }
     }
 }

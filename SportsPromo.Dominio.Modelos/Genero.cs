@@ -16,5 +16,7 @@ namespace SportsPromo.Dominio.Modelos
         public string GeneroNome { get; set; }
 
         public virtual List<Inscricao> Inscricoes { get; set; }
+
+        public virtual List<Categoria> Categorias { get; set; }
     }
 }

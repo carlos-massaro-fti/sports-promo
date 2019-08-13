@@ -6,6 +6,8 @@ using Unity;
 using SportsPromo.Interfaces.Dominio.Servicos;
 using SportsPromo.Dependencias;
 using SportsPromo.Dominio.Modelos;
+using SportsPromo.Comum.Exceptions;
+using System.Linq;
 
 namespace SportsPromo.Testes.Dominio.Servicos
 {
@@ -79,11 +81,17 @@ namespace SportsPromo.Testes.Dominio.Servicos
         public void PegarTeste()
         {
 
-            var instancia = new Genero() { GeneroNome = "Mais outro  aí" };
+            var instancia = new Genero() { GeneroNome = "x" };
+            try
+            {
+                var result = GeneroServico.Adicionar(instancia);
 
-            var result = GeneroServico.Adicionar(instancia);
-
-            Assert.IsTrue(result > 0);
+                Assert.IsTrue(result > 0);
+            }
+            catch (AppException ex) {
+                Assert.IsTrue(ex.ValidationResults.Any());
+            }
+            
 
         }
     }

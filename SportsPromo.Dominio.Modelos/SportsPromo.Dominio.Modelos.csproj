@@ -52,6 +52,7 @@
     <Compile Include="Marco.cs" />
     <Compile Include="Mensagem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ProvaTemCategoria.cs" />
     <Compile Include="Prova.cs" />
     <Compile Include="Receptor.cs" />
     <Compile Include="Usuario.cs" />
