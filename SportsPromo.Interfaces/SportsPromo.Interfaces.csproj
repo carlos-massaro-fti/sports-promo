@@ -53,6 +53,7 @@
     <Compile Include="Dados\Repositorios\IGeneroRepositorio.cs" />
     <Compile Include="Dominio\Servicos\IEsporteServico.cs" />
     <Compile Include="Dominio\Servicos\IGeneroServico.cs" />
+    <Compile Include="Dominio\Servicos\IReceptor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
