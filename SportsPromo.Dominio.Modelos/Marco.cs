@@ -11,17 +11,17 @@ namespace SportsPromo.Dominio.Modelos
     public class Marco
     {
         public long MarcoId { get; set; }
-        [Required]
+
         public decimal MarcoLat { get; set; }
-        [Required]
+
         public decimal MarcoLon { get; set; }
 
-        [ForeignKey("Prova")][Required]
         public long MarcoProvaId { get; set; }
+
         public Prova Prova { get; set; }
 
-        [ForeignKey("Receptor")][Required]
         public long MarcoReceptorId { set; get; }
+
         public Receptor Receptor { set; get;  }
 
     }

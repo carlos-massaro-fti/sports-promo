@@ -10,8 +10,11 @@ namespace SportsPromo.Dominio.Modelos
      public class Equipe
     {
         public long EquipeId { get; set; }
+
         public string EquipeNome { get; set; }
+
         public long EquipeProvaId { get; set; }
+
         public Prova Prova { get; set; }
 
         public virtual List<Inscricao> Inscricoes { get; set; }

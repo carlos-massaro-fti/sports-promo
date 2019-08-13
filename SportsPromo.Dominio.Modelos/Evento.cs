@@ -11,7 +11,6 @@ namespace SportsPromo.Dominio.Modelos
     [Table("EVENTO")]
     public class Evento
     {
-        [Required]
         public long EventoId { get; set; }
 
         public string EventoLocal { get; set; }

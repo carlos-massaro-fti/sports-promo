@@ -9,6 +9,7 @@ namespace SportsPromo.Dominio.Modelos
     public class Mensagem
     {
         public long MensagemId { get; set; }
+
         public string MensagemTexto { get; set; }
     }
 }
