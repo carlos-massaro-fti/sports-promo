@@ -18,16 +18,22 @@ namespace SportsPromo.Dados.Mapeamento
             HasKey(e => e.ProvaId);
 
             Property(e => e.ProvaId)
-                .HasColumnName("ESPORTE_ID")
+                .HasColumnName("PROVA_ID")
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
-            HasMany(e => e.Marcos).WithRequired(e =>e.Prova).HasForeignKey(e =>e.MarcoProvaID);
-
             Property(e => e.ProvaComecaEm)
-                .HasColumnName("PROVACOMECAEM")
+                .HasColumnName("PROVA_COMECA_EM")
                 .IsRequired();
 
-            HasRequired(e => e.ProvaEvento).WithRequiredDependent(e => e.ProvaEvento.);
+            HasRequired(e => e.Esporte)
+                .WithMany(e => e.Provas)
+                .HasForeignKey(e => e.ProvaEsporteId)
+                .WillCascadeOnDelete(false);
+
+            HasMany(e => e.Marcos)
+                .WithRequired(e => e.Prova)
+                .HasForeignKey(e => e.MarcoProvaId)
+                .WillCascadeOnDelete(false);
 
         }
     }
