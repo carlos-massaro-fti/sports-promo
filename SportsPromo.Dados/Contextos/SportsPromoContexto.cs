@@ -19,23 +19,25 @@ namespace SportsPromo.Dados.Contextos
         }
 
         public DbSet<Genero> Generos { get; set; }
-
+        public DbSet<Categoria> Categorias { get; set; }
+        public DbSet<Equipe> Equipes { get; set; }
+        public DbSet<Esporte> Esportes { get; set; }
+        public DbSet<Marco> Marcos { get; set; }
+        public DbSet<Prova> Provas { get; set; }
+        public DbSet<Receptor> Receptores { get; set; }
+        public DbSet<Checagem> Checagems { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-
             modelBuilder.Configurations.Add(new GeneroMapa());
             modelBuilder.Configurations.Add(new EsporteMapa());
             modelBuilder.Configurations.Add(new UsuarioMapa());
             modelBuilder.Configurations.Add(new ReceptorMapa());
             modelBuilder.Configurations.Add(new InscricaoMapa());
-
-            //modelBuilder.Types<Genero>().Configure(e =>
-            //{
-            //    e.ToTable("");
-            //    e.Property(x => x.GeneroId).HasColumnName("GENERO_ID");
-
-            //});
-
+            modelBuilder.Configurations.Add(new MarcoMapa());
+            modelBuilder.Configurations.Add(new CategoriaMapa());
+            modelBuilder.Configurations.Add(new EquipeMapa());
+            modelBuilder.Configurations.Add(new ChecagemMapa());
         }
     }
 }

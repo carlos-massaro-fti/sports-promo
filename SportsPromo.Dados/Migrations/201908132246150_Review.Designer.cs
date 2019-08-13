@@ -7,13 +7,13 @@ namespace SportsPromo.Dados.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class Inicial : IMigrationMetadata
+    public sealed partial class Review : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Inicial));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(Review));
         
         string IMigrationMetadata.Id
         {
-            get { return "201908092325162_Inicial"; }
+            get { return "201908132246150_Review"; }
         }
         
         string IMigrationMetadata.Source

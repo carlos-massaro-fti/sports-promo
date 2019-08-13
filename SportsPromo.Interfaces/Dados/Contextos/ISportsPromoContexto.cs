@@ -12,6 +12,14 @@ namespace SportsPromo.Interfaces.Dados.Contextos
     public interface ISportsPromoContexto
     {
         DbSet<Genero> Generos { get; set; }
+        DbSet<Categoria> Categorias { get; set; }
+        DbSet<Equipe> Equipes { get; set; }
+        DbSet<Esporte> Esportes { get; set; }
+        DbSet<Marco> Marcos { get; set; }
+        DbSet<Prova> Provas { get; set; }
+        DbSet<Receptor> Receptores { get; set; }
+        DbSet<Checagem> Checagems { get; set; }
+        DbSet<Usuario> Usuarios { get; set; }
         DbSet<TEntity> Set<TEntity>() where TEntity : class;
         int SaveChanges();
         DbEntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;
