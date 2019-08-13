@@ -27,6 +27,7 @@ namespace SportsPromo.Dados.Contextos
             modelBuilder.Configurations.Add(new EsporteMapa());
             modelBuilder.Configurations.Add(new UsuarioMapa());
             modelBuilder.Configurations.Add(new ReceptorMapa());
+            modelBuilder.Configurations.Add(new InscricaoMapa());
 
             //modelBuilder.Types<Genero>().Configure(e =>
             //{

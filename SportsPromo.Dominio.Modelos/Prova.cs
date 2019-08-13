@@ -13,6 +13,7 @@ namespace SportsPromo.Dominio.Modelos
         public string EventoId { get; set; }
         [ForeignKey("Evento")]
         public long ProvaEvento { get; set; }
+        public virtual List<Marco> Marcos { get; set; }
 
         public virtual List<Equipe> Equipes { get; set; }
     }

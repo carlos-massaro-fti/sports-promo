@@ -14,5 +14,7 @@ namespace SportsPromo.Dominio.Modelos
         public long EquipeProvaId { get; set; }
         public Prova Prova { get; set; }
 
+        public virtual List<Inscricao> Inscricoes { get; set; }
+
     }
 }
