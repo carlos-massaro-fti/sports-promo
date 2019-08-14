@@ -21,8 +21,20 @@ namespace SportsPromo.Dados.Mapeamento
                 .HasColumnName("PROVA_ID")
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
+            Property(e => e.ProvaEsporteId)
+                .HasColumnName("PROVA_ESPORTE_ID")
+                .IsRequired();
+
             Property(e => e.ProvaComecaEm)
                 .HasColumnName("PROVA_COMECA_EM")
+                .IsRequired();
+
+            Property(e => e.ProvaLocal)
+                .HasColumnName("PROVA_LOCAL")
+                .IsRequired();
+
+            Property(e => e.ProvaEventoId)
+                .HasColumnName("PROVA_EVENTO_ID")
                 .IsRequired();
 
             HasRequired(e => e.Esporte)
