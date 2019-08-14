@@ -9,6 +9,7 @@ namespace SportsPromo.Interfaces.Dominio.Servicos
 {
    public interface IReceptor
     {
+        List<Receptor> Listar();
         Receptor Pegar(long id);
         bool Deletar(long id);
         bool Alterar(Receptor instancia);
