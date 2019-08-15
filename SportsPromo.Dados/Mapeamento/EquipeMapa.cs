@@ -9,7 +9,7 @@ using SportsPromo.Dominio.Modelos;
 
 namespace SportsPromo.Dados.Mapeamento
 {
-    class EquipeMapa : EntityTypeConfiguration<Equipe>
+    public class EquipeMapa : EntityTypeConfiguration<Equipe>
     {
         public EquipeMapa()
         {

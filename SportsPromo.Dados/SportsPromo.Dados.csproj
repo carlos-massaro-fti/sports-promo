@@ -57,12 +57,17 @@
     <Compile Include="Mapeamento\GeneroMapa.cs" />
     <Compile Include="Mapeamento\InscricaoMapa.cs" />
     <Compile Include="Mapeamento\ProvaMapa.cs" />
+    <Compile Include="Mapeamento\ProvaTemCategoriaMapa.cs" />
     <Compile Include="Mapeamento\UsuarioMapa.cs" />
     <Compile Include="Mapeamento\ReceptorMapa.cs" />
     <Compile Include="Mapeamento\MarcoMapa.cs" />
     <Compile Include="Migrations\201908132246150_Review.cs" />
     <Compile Include="Migrations\201908132246150_Review.Designer.cs">
       <DependentUpon>201908132246150_Review.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908142339266_ReReview.cs" />
+    <Compile Include="Migrations\201908142339266_ReReview.Designer.cs">
+      <DependentUpon>201908142339266_ReReview.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -84,6 +89,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201908132246150_Review.resx">
       <DependentUpon>201908132246150_Review.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908142339266_ReReview.resx">
+      <DependentUpon>201908142339266_ReReview.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

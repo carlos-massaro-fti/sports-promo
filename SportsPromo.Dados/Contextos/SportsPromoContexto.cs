@@ -38,6 +38,7 @@ namespace SportsPromo.Dados.Contextos
             modelBuilder.Configurations.Add(new CategoriaMapa());
             modelBuilder.Configurations.Add(new EquipeMapa());
             modelBuilder.Configurations.Add(new ChecagemMapa());
+            modelBuilder.Configurations.Add(new ProvaTemCategoriaMapa());
         }
     }
 }
