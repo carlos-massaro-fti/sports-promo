@@ -35,9 +35,25 @@ namespace SportsPromo.Dominio.Servicos
 
         public bool Alterar(Genero instancia)
         {
-            var result = GeneroRepositorio.Alterar(instancia);
+            var atualInstancia = GeneroRepositorio.Pegar(instancia.GeneroId);
+
+            Mesclar(atualInstancia, instancia);
+
+            var validationResult = Validar(atualInstancia);
+
+            if (validationResult.Any())
+            {
+                throw new AppException(validationResult.First().ErrorMessage, validationResult);
+            }
+
+            var result = GeneroRepositorio.Alterar(atualInstancia);
 
             return result;
+        }
+
+        private void Mesclar(Genero atualInstancia, Genero novaInstancia)
+        {
+            atualInstancia.GeneroNome = novaInstancia.GeneroNome;
         }
 
         public bool Deletar(long id)
@@ -65,11 +81,11 @@ namespace SportsPromo.Dominio.Servicos
         {
             if (instancia.GeneroNome.Length > 256)
             {
-                yield return new ValidationResult("O nome não pode ter mais de 256 caracteres");
+                yield return new ValidationResult("O nome não pode ter mais de 256 caracteres", new string[] { "GeneroNome" });
             }
             if (instancia.GeneroNome.Length < 3)
             {
-                yield return new ValidationResult("O nome não pode ter menos de 3 caracteres");
+                yield return new ValidationResult("O Nome não pode ter menos de 3 caracteres", new string[] { "GeneronNome" });
             }
         }
     }

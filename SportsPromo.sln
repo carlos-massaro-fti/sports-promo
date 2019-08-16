@@ -36,6 +36,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportsPromo.App.Testes", "S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportsPromo.App.WebSite", "SportsPromo.App.WebSite\SportsPromo.App.WebSite.csproj", "{E00C4305-FB92-44B8-B811-B8963FAD485D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SportsPromo.App.WebSiteAdm", "SportsPromo.App.WebSiteAdm\SportsPromo.App.WebSiteAdm.csproj", "{EC9E3764-1F7E-4110-888B-D8FAF27E0480}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -98,6 +100,10 @@ Global
 		{E00C4305-FB92-44B8-B811-B8963FAD485D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E00C4305-FB92-44B8-B811-B8963FAD485D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E00C4305-FB92-44B8-B811-B8963FAD485D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC9E3764-1F7E-4110-888B-D8FAF27E0480}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC9E3764-1F7E-4110-888B-D8FAF27E0480}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC9E3764-1F7E-4110-888B-D8FAF27E0480}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC9E3764-1F7E-4110-888B-D8FAF27E0480}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
