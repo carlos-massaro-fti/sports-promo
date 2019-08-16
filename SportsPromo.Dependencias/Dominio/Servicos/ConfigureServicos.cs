@@ -14,7 +14,8 @@ namespace SportsPromo.Dependencias.Dominio.Servicos
     {
         public static void Configure(IUnityContainer container)
         {
-           container.RegisterType<IGeneroServico, GeneroServico>(new HierarchicalLifetimeManager());
+            container.RegisterType<IGeneroServico, GeneroServico>(new HierarchicalLifetimeManager());
+            container.RegisterType<IReceptorServico, ReceptorServico>(new HierarchicalLifetimeManager());
         }
     }
 }

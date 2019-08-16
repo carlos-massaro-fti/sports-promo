@@ -16,6 +16,7 @@ namespace SportsPromo.Dependencias.Dados.Repositorios
         public static void Configure(IUnityContainer container)
         {
             container.RegisterType<IGeneroRepositorio, GeneroRepositorio>(new HierarchicalLifetimeManager());
+            container.RegisterType<IReceptorRepositorio, ReceptorRepositorio>(new HierarchicalLifetimeManager());
         }
     }
 }
