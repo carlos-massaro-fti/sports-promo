@@ -11,7 +11,6 @@ namespace SportsPromo.Interfaces.Dominio.Servicos
 {
     public interface IReceptorServico
     {
-        IReceptorRepositorio ReceptorRepositorio { get; }
         List<Receptor> Listar();
         Receptor Pegar(long id);
         bool Deletar(long id);
