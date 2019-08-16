@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="GeneroServico.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReceptorServico.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SportsPromo.Comum\SportsPromo.Comum.csproj">

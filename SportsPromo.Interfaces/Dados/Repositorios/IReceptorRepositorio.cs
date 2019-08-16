@@ -4,13 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using SportsPromo.Interfaces.Dados.Repositorios;
 
-namespace SportsPromo.Interfaces.Dominio.Servicos
+namespace SportsPromo.Interfaces.Dados.Repositorios
 {
-   public interface IReceptor
+    public interface IReceptorRepositorio
     {
-        IReceptorRepositorio ReceptorRepositorio { get;  }
         List<Receptor> Listar();
         Receptor Pegar(long id);
         bool Deletar(long id);
