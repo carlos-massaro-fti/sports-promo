@@ -85,7 +85,7 @@ namespace SportsPromo.Dominio.Servicos
             }
             if (instancia.GeneroNome.Length < 3)
             {
-                yield return new ValidationResult("O Nome não pode ter menos de 3 caracteres", new string[] { "GeneronNome" });
+                yield return new ValidationResult("O Nome não pode ter menos de 3 caracteres", new string[] { "GeneroNome" });
             }
         }
     }

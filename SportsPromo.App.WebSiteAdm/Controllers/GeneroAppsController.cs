@@ -132,13 +132,14 @@ namespace SportsPromo.App.WebSiteAdm.Controllers
                         if (string.IsNullOrEmpty(localName))
                         {
                             ModelState.AddModelError(string.Empty, e.ErrorMessage);
-                            ModelState.AddModelError(string.Empty, "Teste");
                         }
                         else
                         {
                             ModelState.AddModelError(localName, e.ErrorMessage);
                         }
                     });
+                    ModelState.AddModelError(string.Empty, "Problemas ao Alterar!");
+
                 }
             }
             return View(generoApp);
