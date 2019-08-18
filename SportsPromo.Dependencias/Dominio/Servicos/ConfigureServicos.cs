@@ -16,6 +16,7 @@ namespace SportsPromo.Dependencias.Dominio.Servicos
         {
             container.RegisterType<IGeneroServico, GeneroServico>(new HierarchicalLifetimeManager());
             container.RegisterType<IReceptorServico, ReceptorServico>(new HierarchicalLifetimeManager());
+            container.RegisterType<IEsporteServico, EsporteServico>(new HierarchicalLifetimeManager());
         }
     }
 }

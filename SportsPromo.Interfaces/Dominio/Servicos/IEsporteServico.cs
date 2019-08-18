@@ -15,7 +15,7 @@ namespace SportsPromo.Interfaces.Dominio.Servicos
         bool Deletar(long id);
         bool Alterar(Esporte instancia);
         long Adicionar(Esporte instancia);
-        IEnumerable<ValidationResult> Validate(Esporte instancia);
+        IEnumerable<ValidationResult> Validar(Esporte instancia);
 
     }
 }
