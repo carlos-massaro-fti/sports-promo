@@ -8,6 +8,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SportsPromo.App.Core.Modelos;
 using SportsPromo.App.Dependencias;
 using SportsPromo.App.Interfaces.Manipuladores;
+using SportsPromo.Comum.Dados;
 using SportsPromo.Comum.Exceptions;
 using Unity;
 
@@ -34,7 +35,6 @@ namespace SportsPromo.App.Testes.Core.Manipuladores
         [TestMethod]
         public void PegarTeste()
         {
-
             var instancia = new EsporteApp() { Nome = "x" };
             try
             {
@@ -46,8 +46,27 @@ namespace SportsPromo.App.Testes.Core.Manipuladores
             {
                 Assert.IsTrue(ex.ValidationResults.Any());
             }
+        }
 
+        [TestMethod]
+        public void ListarTeste()
+        {
 
+            var consulta = new PaginadoOrdenado<EsporteApp>()
+            {
+                ItensPorPagina = 4,
+                PaginaAtual = 5
+            };
+            try
+            {
+                var result = EsporteManipulador.Listar(consulta);
+
+                Assert.IsTrue(result.Itens.Count() > 0);
+            }
+            catch (AppException ex)
+            {
+                Assert.IsTrue(ex.ValidationResults.Any());
+            }
         }
     }
 }

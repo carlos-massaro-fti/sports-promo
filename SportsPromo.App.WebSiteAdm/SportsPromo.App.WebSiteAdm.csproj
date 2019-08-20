@@ -201,7 +201,7 @@
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\GeneroAppsController.cs" />
+    <Compile Include="Controllers\EsporteController.cs" />
     <Compile Include="Controllers\GeneroController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -271,15 +271,19 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\GeneroApps\Create.cshtml" />
-    <Content Include="Views\GeneroApps\Delete.cshtml" />
-    <Content Include="Views\GeneroApps\Details.cshtml" />
-    <Content Include="Views\GeneroApps\Edit.cshtml" />
-    <Content Include="Views\GeneroApps\Index.cshtml" />
+    <Content Include="Views\Genero\Create.cshtml" />
+    <Content Include="Views\Genero\Delete.cshtml" />
+    <Content Include="Views\Genero\Details.cshtml" />
+    <Content Include="Views\Genero\Edit.cshtml" />
+    <Content Include="Views\Genero\Index.cshtml" />
+    <Content Include="Views\Esporte\Create.cshtml" />
+    <Content Include="Views\Esporte\Delete.cshtml" />
+    <Content Include="Views\Esporte\Details.cshtml" />
+    <Content Include="Views\Esporte\Edit.cshtml" />
+    <Content Include="Views\Esporte\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Genero\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

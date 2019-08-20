@@ -1,89 +1,175 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using SportsPromo.App.Core.Modelos;
+using SportsPromo.App.Interfaces.Manipuladores;
+using SportsPromo.App.WebSiteAdm.Models;
+using SportsPromo.Comum.Exceptions;
+using SportsPromo.Comum.Helpers;
 
 namespace SportsPromo.App.WebSiteAdm.Controllers
 {
     public class GeneroController : Controller
     {
-        // GET: Genero
+
+        protected readonly IGeneroManipulador GeneroManipulador;
+        public GeneroController(IGeneroManipulador generoManipulador)
+        {
+            GeneroManipulador = generoManipulador;
+        }
+
+        // GET: GeneroApps
         public ActionResult Index()
         {
-            return View();
+            var result = GeneroManipulador.Listar();
+
+            return View(result);
         }
 
-        // GET: Genero/Details/5
-        public ActionResult Details(int id)
+        // GET: GeneroApps/Details/5
+        public ActionResult Details(long? id)
         {
-            return View();
+
+
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var generoApp = GeneroManipulador.Pegar(id.Value);
+
+            if (generoApp == null)
+            {
+                return HttpNotFound();
+            }
+            return View(generoApp);
         }
 
-        // GET: Genero/Create
+        // GET: GeneroApps/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Genero/Create
+        // POST: GeneroApps/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "Id,Nome")] GeneroApp generoApp)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
+                var result = GeneroManipulador.Adicionar(generoApp);
+                if (result > 0)
+                {
+                    return RedirectToAction("Index");
+                }
+            }
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return View(generoApp);
         }
 
-        // GET: Genero/Edit/5
-        public ActionResult Edit(int id)
+        // GET: GeneroApps/Edit/5
+        public ActionResult Edit(long? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var generoApp = GeneroManipulador.Pegar(id.Value);
+
+            if (generoApp == null)
+            {
+                return HttpNotFound();
+            }
+            return View(generoApp);
         }
 
-        // POST: Genero/Edit/5
+        // POST: GeneroApps/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "Id,Nome")] GeneroApp generoApp)
         {
-            try
-            {
-                // TODO: Add update logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
+            if (ModelState.IsValid)
             {
-                return View();
+                try
+                {
+                    var result = GeneroManipulador.Alterar(generoApp);
+                    if (result)
+                    {
+                        return RedirectToAction("Index");
+                    }
+                }
+                catch (AppException ex)
+                {
+
+                    ex.ValidationResults.ToList().ForEach(e =>
+                    {
+                        var localName = string.Empty;
+
+                        if (e.MemberNames.Any())
+                        {
+                            var memberName = e.MemberNames.First();
+                            switch (memberName)
+                            {
+                                case "GeneroNome":
+                                    localName = "Nome";
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        if (string.IsNullOrEmpty(localName))
+                        {
+                            ModelState.AddModelError(string.Empty, e.ErrorMessage);
+                        }
+                        else
+                        {
+                            ModelState.AddModelError(localName, e.ErrorMessage);
+                        }
+                    });
+                    ModelState.AddModelError(string.Empty, "Problemas ao Alterar!");
+
+                }
             }
+            return View(generoApp);
         }
 
-        // GET: Genero/Delete/5
-        public ActionResult Delete(int id)
+        // GET: GeneroApps/Delete/5
+        public ActionResult Delete(long? id)
         {
-            return View();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            var generoApp = GeneroManipulador.Pegar(id.Value);
+
+            if (generoApp == null)
+            {
+                return HttpNotFound();
+            }
+            return View(generoApp);
         }
 
-        // POST: Genero/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        // POST: GeneroApps/Delete/5
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(long id)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            var result = GeneroManipulador.Deletar(id);
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction("Index");
         }
     }
 }

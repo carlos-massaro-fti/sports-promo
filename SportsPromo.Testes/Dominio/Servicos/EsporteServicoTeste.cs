@@ -8,6 +8,7 @@ using SportsPromo.Dependencias;
 using SportsPromo.Dominio.Modelos;
 using SportsPromo.Comum.Exceptions;
 using System.Linq;
+using SportsPromo.Comum.Dados;
 
 namespace SportsPromo.Testes.Dominio.Servicos
 {
@@ -91,8 +92,26 @@ namespace SportsPromo.Testes.Dominio.Servicos
             catch (AppException ex) {
                 Assert.IsTrue(ex.ValidationResults.Any());
             }
-            
-
         }
+        [TestMethod]
+        public void ListarTeste()
+        {
+
+            var consulta = new PaginadoOrdenado<Esporte>() {
+                ItensPorPagina = 4,
+                PaginaAtual = 5
+            };
+            try
+            {
+                var result = EsporteServico.Listar(consulta);
+
+                Assert.IsTrue(result.Itens.Count() > 0);
+            }
+            catch (AppException ex)
+            {
+                Assert.IsTrue(ex.ValidationResults.Any());
+            }
+        }
+
     }
 }

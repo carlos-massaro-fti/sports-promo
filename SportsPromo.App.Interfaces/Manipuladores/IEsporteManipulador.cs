@@ -1,4 +1,5 @@
 ﻿using SportsPromo.App.Core.Modelos;
+using SportsPromo.Comum.Dados;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -11,6 +12,7 @@ namespace SportsPromo.App.Interfaces.Manipuladores
     public interface IEsporteManipulador
 
     {
+        PaginadoOrdenado<EsporteApp> Listar(PaginadoOrdenado<EsporteApp> consulta);
         List<EsporteApp> Listar();
         EsporteApp Pegar(long id);
         bool Deletar(long id);

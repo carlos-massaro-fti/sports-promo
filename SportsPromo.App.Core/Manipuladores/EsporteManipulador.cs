@@ -8,6 +8,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SportsPromo.Comum.Dados;
 
 namespace SportsPromo.App.Core.Manipuladores
 {
@@ -54,6 +55,56 @@ namespace SportsPromo.App.Core.Manipuladores
         public IEnumerable<ValidationResult> Validar(EsporteApp instancia)
         {
             throw new NotImplementedException();
+        }
+
+
+
+        public PaginadoOrdenado<EsporteApp> Listar(PaginadoOrdenado<EsporteApp> consulta)
+        {
+            var consultaDominio = new PaginadoOrdenado<Esporte>()
+            {
+                ItensPorPagina = consulta.ItensPorPagina,
+                PaginaAtual = consulta.PaginaAtual,
+                OrdemDirecao = consulta.OrdemDirecao,
+            };
+
+            switch (consulta.OrdemNome)
+            {
+                case "Id":
+                    consultaDominio.OrdemNome = "EsporteId";
+                    break;
+                case "Nome":
+                    consultaDominio.OrdemNome = "EsporteNome";
+                    break;
+            }
+
+            var resultadoDominio = EsporteServico.Listar(consultaDominio);
+
+            var resultado = new PaginadoOrdenado<EsporteApp>()
+            {
+                ItensPorPagina = resultadoDominio.ItensPorPagina,
+                ContagemDePaginas = resultadoDominio.ContagemDePaginas,
+                ContagemDeLinhas = resultadoDominio.ContagemDeLinhas,
+                PaginaAtual = resultadoDominio.PaginaAtual,
+                Itens = resultadoDominio.Itens.Select(e => new EsporteApp()
+                {
+                    Id = e.EsporteId,
+                    Nome = e.EsporteNome
+                }),
+                OrdemDirecao = resultadoDominio.OrdemDirecao
+            };
+
+            switch (resultadoDominio.OrdemNome)
+            {
+                case "EsporteId":
+                    resultado.OrdemNome = "Id";
+                    break;
+                case "EsporteNome":
+                    resultado.OrdemNome = "Nome";
+                    break;
+            }
+
+            return resultado;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using SportsPromo.Comum.Exceptions;
+﻿using SportsPromo.Comum.Dados;
+using SportsPromo.Comum.Exceptions;
 using SportsPromo.Dominio.Modelos;
 using SportsPromo.Interfaces.Dados.Repositorios;
 using SportsPromo.Interfaces.Dominio.Servicos;
@@ -89,7 +90,13 @@ namespace SportsPromo.Dominio.Servicos
                 yield return new ValidationResult("O nome do esporte não pode ter menos de 3 caracteres", new string[] { "EsporteNome" });
             }
         }
-       
+
+        public PaginadoOrdenado<Esporte> Listar(PaginadoOrdenado<Esporte> consulta)
+        {
+            var result = EsporteRepositorio.Listar(consulta);
+
+            return result;
+        }
     }
 }
 

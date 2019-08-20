@@ -9,29 +9,39 @@ using System.Web.Mvc;
 using SportsPromo.App.Core.Modelos;
 using SportsPromo.App.Interfaces.Manipuladores;
 using SportsPromo.App.WebSiteAdm.Models;
+using SportsPromo.Comum.Dados;
 using SportsPromo.Comum.Exceptions;
 using SportsPromo.Comum.Helpers;
 
 namespace SportsPromo.App.WebSiteAdm.Controllers
 {
-    public class GeneroAppsController : Controller
+    public class EsporteController : Controller
     {
 
-        protected readonly IGeneroManipulador GeneroManipulador;
-        public GeneroAppsController(IGeneroManipulador generoManipulador)
+        protected readonly IEsporteManipulador EsporteManipulador;
+        public EsporteController(IEsporteManipulador esporteManipulador)
         {
-            GeneroManipulador = generoManipulador;
+            EsporteManipulador = esporteManipulador;
         }
 
-        // GET: GeneroApps
-        public ActionResult Index()
+        // GET: EsporteApps
+        public ActionResult Index(int? page, string sort, int? direction)
         {
-            var result = GeneroManipulador.Listar();
+
+            var consulta = new PaginadoOrdenado<EsporteApp>()
+            {
+                PaginaAtual = page ?? 1,
+                ItensPorPagina = 6,
+                OrdemNome = sort ?? "Id",
+                OrdemDirecao = direction ?? 0
+            };
+
+           var result = EsporteManipulador.Listar(consulta);
 
             return View(result);
         }
 
-        // GET: GeneroApps/Details/5
+        // GET: EsporteApps/Details/5
         public ActionResult Details(long? id)
         {
 
@@ -41,41 +51,41 @@ namespace SportsPromo.App.WebSiteAdm.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            var generoApp = GeneroManipulador.Pegar(id.Value);
+            var EsporteApp = EsporteManipulador.Pegar(id.Value);
 
-            if (generoApp == null)
+            if (EsporteApp == null)
             {
                 return HttpNotFound();
             }
-            return View(generoApp);
+            return View(EsporteApp);
         }
 
-        // GET: GeneroApps/Create
+        // GET: EsporteApps/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: GeneroApps/Create
+        // POST: EsporteApps/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nome")] GeneroApp generoApp)
+        public ActionResult Create([Bind(Include = "Id,Nome")] EsporteApp EsporteApp)
         {
             if (ModelState.IsValid)
             {
-                var result = GeneroManipulador.Adicionar(generoApp);
+                var result = EsporteManipulador.Adicionar(EsporteApp);
                 if (result > 0)
                 {
                     return RedirectToAction("Index");
                 }
             }
 
-            return View(generoApp);
+            return View(EsporteApp);
         }
 
-        // GET: GeneroApps/Edit/5
+        // GET: EsporteApps/Edit/5
         public ActionResult Edit(long? id)
         {
             if (id == null)
@@ -83,28 +93,28 @@ namespace SportsPromo.App.WebSiteAdm.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var generoApp = GeneroManipulador.Pegar(id.Value);
+            var EsporteApp = EsporteManipulador.Pegar(id.Value);
 
-            if (generoApp == null)
+            if (EsporteApp == null)
             {
                 return HttpNotFound();
             }
-            return View(generoApp);
+            return View(EsporteApp);
         }
 
-        // POST: GeneroApps/Edit/5
+        // POST: EsporteApps/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nome")] GeneroApp generoApp)
+        public ActionResult Edit([Bind(Include = "Id,Nome")] EsporteApp EsporteApp)
         {
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var result = GeneroManipulador.Alterar(generoApp);
+                    var result = EsporteManipulador.Alterar(EsporteApp);
                     if (result)
                     {
                         return RedirectToAction("Index");
@@ -122,7 +132,7 @@ namespace SportsPromo.App.WebSiteAdm.Controllers
                             var memberName = e.MemberNames.First();
                             switch (memberName)
                             {
-                                case "GeneroNome":
+                                case "EsporteNome":
                                     localName = "Nome";
                                     break;
                                 default:
@@ -142,10 +152,10 @@ namespace SportsPromo.App.WebSiteAdm.Controllers
 
                 }
             }
-            return View(generoApp);
+            return View(EsporteApp);
         }
 
-        // GET: GeneroApps/Delete/5
+        // GET: EsporteApps/Delete/5
         public ActionResult Delete(long? id)
         {
             if (id == null)
@@ -153,21 +163,21 @@ namespace SportsPromo.App.WebSiteAdm.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            var generoApp = GeneroManipulador.Pegar(id.Value);
+            var EsporteApp = EsporteManipulador.Pegar(id.Value);
 
-            if (generoApp == null)
+            if (EsporteApp == null)
             {
                 return HttpNotFound();
             }
-            return View(generoApp);
+            return View(EsporteApp);
         }
 
-        // POST: GeneroApps/Delete/5
+        // POST: EsporteApps/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(long id)
         {
-            var result = GeneroManipulador.Deletar(id);
+            var result = EsporteManipulador.Deletar(id);
 
             return RedirectToAction("Index");
         }

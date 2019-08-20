@@ -63,6 +63,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SportsPromo.Comum\SportsPromo.Comum.csproj">
+      <Project>{3FF22834-A106-4CAC-9853-5976C2607386}</Project>
+      <Name>SportsPromo.Comum</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SportsPromo.Dominio.Modelos\SportsPromo.Dominio.Modelos.csproj">
       <Project>{5B4F9D03-7AAC-430C-9D97-7C579E0B892D}</Project>
       <Name>SportsPromo.Dominio.Modelos</Name>
