@@ -10,7 +10,7 @@ namespace SportsPromo.Interfaces.Dominio.Servicos
 {
     interface IMarcoServico
     {
-        IMarcoServico MarcoRepositorio { get; }
+        //IMarcoServico MarcoRepositorio { get; }
         List<Marco> Listar();
         Marco Pegar(long id);
         bool Deletar(long id);
