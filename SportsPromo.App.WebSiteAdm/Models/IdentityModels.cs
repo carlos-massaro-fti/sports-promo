@@ -17,7 +17,7 @@ namespace SportsPromo.App.WebSiteAdm.Models
             return userIdentity;
         }
     }
-
+    /*
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
@@ -30,4 +30,4 @@ namespace SportsPromo.App.WebSiteAdm.Models
             return new ApplicationDbContext();
         }
     }
-}
+*/}

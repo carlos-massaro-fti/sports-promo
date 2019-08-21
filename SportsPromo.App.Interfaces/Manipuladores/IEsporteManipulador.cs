@@ -19,5 +19,17 @@ namespace SportsPromo.App.Interfaces.Manipuladores
         bool Alterar(EsporteApp instancia);
         long Adicionar(EsporteApp instancia);
         IEnumerable<ValidationResult> Validar(EsporteApp instancia);
+
+
+        Task<PaginadoOrdenado<EsporteApp>> ListarAsync(PaginadoOrdenado<EsporteApp> consulta);
+        Task<List<EsporteApp>> ListarAsync();
+        Task<EsporteApp> PegarAsync(long id);
+        Task<bool> DeletarAsync(long id);
+        Task<bool> AlterarAsync(EsporteApp instancia);
+        Task<long> AdicionarAsync(EsporteApp instancia);
+        Task<IEnumerable<ValidationResult>> ValidarAsync(EsporteApp instancia);
+
+
+
     }
 }

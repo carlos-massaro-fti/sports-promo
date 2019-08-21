@@ -14,48 +14,48 @@
 <table class="table">
     <tr>
         <th>
-            @Html.LinkDeOrdenacao(Model, "Id", e=>e.Id)
+            @Html.LinkDeOrdenacao(Model, e => e.Id)
         </th>
         <th>
-            @Html.LinkDeOrdenacao(Model, "Nome")
+            @Html.LinkDeOrdenacao(Model, e => e.Nome)
         </th>
         @*<th>
 
-            <a href="@Url.Action("Index", new { page = Model.PaginaAtual , sort="Id", direction = Model.OrdemNome=="Id"? (Model.OrdemDirecao==0?1:0):0})">
-                @Html.DisplayNameFor(model => model.Model.Id)
-                @if (Model.OrdemNome == "Id")
-                {
-                    <sub>
-                        @if (Model.OrdemDirecao == 0)
-                        {
-                            @Html.Raw("ASC")
-                        }
-                        else
-                        {
-                            @Html.Raw("DESC")
-                        }
-                    </sub>
-                }
-            </a>
-        </th>*@
+                <a href="@Url.Action("Index", new { page = Model.PaginaAtual , sort="Id", direction = Model.OrdemNome=="Id"? (Model.OrdemDirecao==0?1:0):0})">
+                    @Html.DisplayNameFor(model => model.Model.Id)
+                    @if (Model.OrdemNome == "Id")
+                    {
+                        <sub>
+                            @if (Model.OrdemDirecao == 0)
+                            {
+                                @Html.Raw("ASC")
+                            }
+                            else
+                            {
+                                @Html.Raw("DESC")
+                            }
+                        </sub>
+                    }
+                </a>
+            </th>*@
         @*<th>
-            <a href="@Url.Action("Index", new { page = Model.PaginaAtual , sort="Nome", direction = Model.OrdemNome=="Nome"? (Model.OrdemDirecao==0?1:0):0})">
-                @Html.DisplayNameFor(model => model.Model.Nome)
-                @if (Model.OrdemNome == "Nome")
-                {
-                    <sub>
-                        @if (Model.OrdemDirecao == 0)
-                        {
-                            @Html.Raw("ASC")
-                        }
-                        else
-                        {
-                            @Html.Raw("DESC")
-                        }
-                    </sub>
-                }
-            </a>
-        </th>*@
+                <a href="@Url.Action("Index", new { page = Model.PaginaAtual , sort="Nome", direction = Model.OrdemNome=="Nome"? (Model.OrdemDirecao==0?1:0):0})">
+                    @Html.DisplayNameFor(model => model.Model.Nome)
+                    @if (Model.OrdemNome == "Nome")
+                    {
+                        <sub>
+                            @if (Model.OrdemDirecao == 0)
+                            {
+                                @Html.Raw("ASC")
+                            }
+                            else
+                            {
+                                @Html.Raw("DESC")
+                            }
+                        </sub>
+                    }
+                </a>
+            </th>*@
         <th></th>
     </tr>
 

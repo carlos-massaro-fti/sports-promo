@@ -97,6 +97,45 @@ namespace SportsPromo.Dominio.Servicos
 
             return result;
         }
+
+        public async Task<PaginadoOrdenado<Esporte>> ListarAsync(PaginadoOrdenado<Esporte> consulta)
+        {
+            var resultado = await EsporteRepositorio.ListarAsync(consulta);
+
+            return resultado;
+        }
+
+        public Task<List<Esporte>> ListarAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Esporte> PegarAsync(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> DeletarAsync(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> AlterarAsync(Esporte instancia)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<long> AdicionarAsync(Esporte instancia)
+        {
+            var resultado = await EsporteRepositorio.AdicionarAsync(instancia);
+
+            return resultado;
+        }
+
+        public async Task<IEnumerable<ValidationResult>> ValidarAsync(Esporte instancia)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
 

@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", "Esporte")
+</p>
+@*<script>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+
+    </script>*@
+
+<table class="table" id="tabela-esporte">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Nome
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+<nav aria-label="Page navigation" id="tabela-esporte-paginador"></nav>
+
+    @section Scripts {
+        @Scripts.Render("~/Scripts/GridJs.js")
+
+        <script>
+            $(document).ready(function () {
+                var gridOptions = {
+                    Url: "https://localhost:44331/api/apiesporte/index/",
+                    Columns: ["Id", "Nome"],
+                    ConteinerDoPaginador: "#tabela-esporte-paginador"
+                };
+                SetupGrid("#tabela-esporte", gridOptions);
+            });
+
+
+        </script>
+
+    }

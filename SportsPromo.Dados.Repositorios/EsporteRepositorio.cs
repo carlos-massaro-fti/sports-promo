@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data.Entity;
 using System.Text;
 using System.Threading.Tasks;
 using SportsPromo.Comum.Dados;
@@ -23,6 +24,21 @@ namespace SportsPromo.Dados.Repositorios
             Contexto.SaveChanges();
 
             return instancia.EsporteId;
+        }
+
+        public Task<long> AdicionarAsync(Esporte instancia)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> AlterarAsync(Esporte instancia)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> DeletarAsync(long id)
+        {
+            throw new NotImplementedException();
         }
 
         public PaginadoOrdenado<Esporte> Listar(PaginadoOrdenado<Esporte> consulta)
@@ -82,6 +98,74 @@ namespace SportsPromo.Dados.Repositorios
             resultado.Itens = query;
 
             return resultado;
+        }
+
+        public async Task<PaginadoOrdenado<Esporte>> ListarAsync(PaginadoOrdenado<Esporte> consulta)
+        {
+            var resultado = new PaginadoOrdenado<Esporte>()
+            {
+                ItensPorPagina = consulta.ItensPorPagina,
+                PaginaAtual = consulta.PaginaAtual,
+                OrdemDirecao = consulta.OrdemDirecao,
+                OrdemNome = consulta.OrdemNome,
+            };
+
+            /*var query = from item in Contexto.Esportes
+                        select item;*/
+
+            var query = Contexto.Esportes.AsQueryable();
+
+
+            resultado.SetTotalDeLinhas(await query.CountAsync());
+
+            if (consulta.OrdemDirecao == 0)
+            {
+                switch (consulta.OrdemNome)
+                {
+                    case "EsporteNome":
+                        query = query.OrderBy(e => e.EsporteNome);
+                        break;
+                    case "EsporteId":
+                    default:
+                        query = query.OrderBy(e => e.EsporteId);
+                        break;
+                }
+            }
+            else
+            {
+                switch (consulta.OrdemNome)
+                {
+                    case "EsporteNome":
+                        query = query.OrderByDescending(e => e.EsporteNome);
+                        break;
+                    case "EsporteId":
+                    default:
+                        query = query.OrderByDescending(e => e.EsporteId);
+                        break;
+                }
+            }
+            if (!(query is IOrderedQueryable))
+            {
+                query = query.OrderBy(e => e.EsporteId);
+            }
+
+            query = query
+                .Skip(resultado.ItensPorPagina * (resultado.PaginaAtual - 1))
+                .Take(resultado.ItensPorPagina);
+
+            resultado.Itens = query;
+
+            return resultado;
+        }
+
+        public Task<List<Esporte>> ListarAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Esporte> PegarAsync(long id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

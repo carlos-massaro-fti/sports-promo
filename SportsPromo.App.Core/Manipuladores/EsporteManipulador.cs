@@ -106,5 +106,85 @@ namespace SportsPromo.App.Core.Manipuladores
 
             return resultado;
         }
+
+        public async Task<PaginadoOrdenado<EsporteApp>> ListarAsync(PaginadoOrdenado<EsporteApp> consulta)
+        {
+
+            var consultaDominio = new PaginadoOrdenado<Esporte>()
+            {
+                ItensPorPagina = consulta.ItensPorPagina,
+                PaginaAtual = consulta.PaginaAtual,
+                OrdemDirecao = consulta.OrdemDirecao,
+            };
+
+            switch (consulta.OrdemNome)
+            {
+                case "Id":
+                    consultaDominio.OrdemNome = "EsporteId";
+                    break;
+                case "Nome":
+                    consultaDominio.OrdemNome = "EsporteNome";
+                    break;
+            }
+
+            var resultadoDominio = await EsporteServico.ListarAsync(consultaDominio);
+
+            var resultado = new PaginadoOrdenado<EsporteApp>()
+            {
+                ItensPorPagina = resultadoDominio.ItensPorPagina,
+                ContagemDePaginas = resultadoDominio.ContagemDePaginas,
+                ContagemDeLinhas = resultadoDominio.ContagemDeLinhas,
+                PaginaAtual = resultadoDominio.PaginaAtual,
+                Itens = resultadoDominio.Itens.Select(e => new EsporteApp()
+                {
+                    Id = e.EsporteId,
+                    Nome = e.EsporteNome
+                }),
+                OrdemDirecao = resultadoDominio.OrdemDirecao
+            };
+
+            switch (resultadoDominio.OrdemNome)
+            {
+                case "EsporteId":
+                    resultado.OrdemNome = "Id";
+                    break;
+                case "EsporteNome":
+                    resultado.OrdemNome = "Nome";
+                    break;
+            }
+
+            return resultado;
+
+        }
+
+        public Task<List<EsporteApp>> ListarAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<EsporteApp> PegarAsync(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> DeletarAsync(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> AlterarAsync(EsporteApp instancia)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<long> AdicionarAsync(EsporteApp instancia)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IEnumerable<ValidationResult>> ValidarAsync(EsporteApp instancia)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

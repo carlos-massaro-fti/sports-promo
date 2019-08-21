@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SportsPromo.App.WebSiteAdm.App_Start;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
@@ -12,15 +13,26 @@ namespace SportsPromo.App.WebSiteAdm
     {
         public static void Register(HttpConfiguration config)
         {
-            //config.DependencyResolvxer
+
+            config.DependencyResolver = new DependencyResolver(UnityConfig.Container); ;
             // Web API configuration and services
 
             // Web API routes
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
+                name: "DefaultApiList",
+                routeTemplate: "api/{controller}/{action}/{page}/{sort}/{direction}",
+                defaults: new { page = 1, sort = RouteParameter.Optional, direction = RouteParameter.Optional }
+            );
+            /*config.Routes.MapHttpRoute(
+                name: "DefaultApiList2",
+                routeTemplate: "api/{controller}/{action}"
+            );*/
+
+            config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{id}",
+                routeTemplate: "api/{controller}/{action}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
         }

@@ -16,5 +16,13 @@ namespace SportsPromo.Interfaces.Dados.Repositorios
         bool Deletar(long id);
         bool Alterar(Esporte instancia);
         long Adicionar(Esporte instancia);
+
+        Task<PaginadoOrdenado<Esporte>> ListarAsync(PaginadoOrdenado<Esporte> consulta);
+        Task<List<Esporte>> ListarAsync();
+        Task<Esporte> PegarAsync(long id);
+        Task<bool> DeletarAsync(long id);
+        Task<bool> AlterarAsync(Esporte instancia);
+        Task<long> AdicionarAsync(Esporte instancia);
+
     }
 }

@@ -19,5 +19,13 @@ namespace SportsPromo.Interfaces.Dominio.Servicos
         long Adicionar(Esporte instancia);
         IEnumerable<ValidationResult> Validar(Esporte instancia);
 
+        Task<PaginadoOrdenado<Esporte>> ListarAsync(PaginadoOrdenado<Esporte> consulta);
+        Task<List<Esporte>> ListarAsync();
+        Task<Esporte> PegarAsync(long id);
+        Task<bool> DeletarAsync(long id);
+        Task<bool> AlterarAsync(Esporte instancia);
+        Task<long> AdicionarAsync(Esporte instancia);
+        Task<IEnumerable<ValidationResult>> ValidarAsync(Esporte instancia);
+
     }
 }

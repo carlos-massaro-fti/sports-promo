@@ -23,6 +23,11 @@ namespace SportsPromo.App.WebSiteAdm.Controllers
         {
             EsporteManipulador = esporteManipulador;
         }
+        public ActionResult OnePage()
+        {
+            return View();
+        }
+
 
         // GET: EsporteApps
         public ActionResult Index(int? page, string sort, int? direction)
