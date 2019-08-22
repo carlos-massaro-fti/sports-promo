@@ -17,11 +17,14 @@
 <table class="table" id="tabela-esporte">
     <thead>
         <tr>
-            <th>
+            <th data-key="Id" data-sort="true">
                 Id
             </th>
-            <th>
+            <th data-key="Nome" data-sort="true">
                 Nome
+            </th>
+            <th>
+                Personalizada
             </th>
             <th></th>
         </tr>
@@ -38,7 +41,25 @@
             $(document).ready(function () {
                 var gridOptions = {
                     Url: "https://localhost:44331/api/apiesporte/index/",
-                    Columns: ["Id", "Nome"],
+                    Colunas: [
+                        {
+                            NomeDoCampo: "Id",
+                            AtributosHtml: "",
+                            CallbackDeRenderizacao: function (itemLinha, atributoColuna) {
+                                var texto = itemLinha[atributoColuna];
+                                var celula = $("<td />").addClass("text-right").append(texto);
+                                return celula;
+                            }
+                        },
+                        "Nome",
+                        {
+                            CallbackDeRenderizacao: function (itemLinha, atributoColuna) {
+                                var texto = `${itemLinha.Id} - ${itemLinha.Nome}`;
+                                var celula = $("<td />").addClass("text-right").append(texto);
+                                return celula;
+                            }
+                        }
+                    ],
                     ConteinerDoPaginador: "#tabela-esporte-paginador"
                 };
                 SetupGrid("#tabela-esporte", gridOptions);
