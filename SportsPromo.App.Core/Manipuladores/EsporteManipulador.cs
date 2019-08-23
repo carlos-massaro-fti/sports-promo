@@ -9,17 +9,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SportsPromo.Comum.Dados;
+using AutoMapper;
 
 namespace SportsPromo.App.Core.Manipuladores
 {
     public class EsporteManipulador : IEsporteManipulador
     {
         protected IEsporteServico EsporteServico { get; }
+        protected IMapper Mapper { get; }
 
 
-        public EsporteManipulador(IEsporteServico esporteServico)
+        public EsporteManipulador(IEsporteServico esporteServico, IMapper mapper)
         {
             EsporteServico = esporteServico;
+            Mapper = mapper;
         }
         public long Adicionar(EsporteApp instancia)
         {
@@ -86,11 +89,7 @@ namespace SportsPromo.App.Core.Manipuladores
                 ContagemDePaginas = resultadoDominio.ContagemDePaginas,
                 ContagemDeLinhas = resultadoDominio.ContagemDeLinhas,
                 PaginaAtual = resultadoDominio.PaginaAtual,
-                Itens = resultadoDominio.Itens.Select(e => new EsporteApp()
-                {
-                    Id = e.EsporteId,
-                    Nome = e.EsporteNome
-                }),
+                Itens =  Mapper.Map<List<EsporteApp>>(resultadoDominio.Itens),
                 OrdemDirecao = resultadoDominio.OrdemDirecao
             };
 
@@ -135,12 +134,8 @@ namespace SportsPromo.App.Core.Manipuladores
                 ContagemDePaginas = resultadoDominio.ContagemDePaginas,
                 ContagemDeLinhas = resultadoDominio.ContagemDeLinhas,
                 PaginaAtual = resultadoDominio.PaginaAtual,
-                Itens = resultadoDominio.Itens.Select(e => new EsporteApp()
-                {
-                    Id = e.EsporteId,
-                    Nome = e.EsporteNome
-                }),
-                OrdemDirecao = resultadoDominio.OrdemDirecao
+                OrdemDirecao = resultadoDominio.OrdemDirecao,
+                Itens = Mapper.Map<List<EsporteApp>>(resultadoDominio.Itens)
             };
 
             switch (resultadoDominio.OrdemNome)

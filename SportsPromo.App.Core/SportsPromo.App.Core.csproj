@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=9.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.9.0.0\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -45,11 +48,11 @@
     <Compile Include="Manipuladores\EsporteManipulador.cs" />
     <Compile Include="Manipuladores\GeneroManipulador.cs" />
     <Compile Include="Manipuladores\MarcoManipulador.cs" />
-    <Compile Include="Mapa\EsporteMapeamento.cs" />
-    <Compile Include="Mapa\GeneroMapeamento.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SportsPromo.App.Interfaces\SportsPromo.App.Interfaces.csproj">
       <Project>{fb34689b-1100-4056-9605-532bd6eb16b5}</Project>

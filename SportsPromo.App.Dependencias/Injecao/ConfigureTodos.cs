@@ -13,7 +13,7 @@ namespace SportsPromo.App.Dependencias
         public static void Configure(IUnityContainer container)
         {
             SportsPromo.Dependencias.ConfigureTodos.Configure(container);
-
+            Mapeamento.Mapeamento.Inicializar(container);
             ConfigureManipulador.Configure(container);
         }
     }

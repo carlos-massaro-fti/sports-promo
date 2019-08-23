@@ -103,7 +103,7 @@ namespace SportsPromo.Testes.Dominio.Servicos
             {
                 var result = MarcoServico.Listar(consulta);
 
-                Assert.IsTrue(result.Itens.Count(consulta) > 0);
+                Assert.IsTrue(result.Itens.Count() > 0);
             }
             catch (AppException ex)
             {

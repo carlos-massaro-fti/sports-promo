@@ -61,10 +61,6 @@
     <Compile Include="Mapeamento\UsuarioMapa.cs" />
     <Compile Include="Mapeamento\ReceptorMapa.cs" />
     <Compile Include="Mapeamento\MarcoMapa.cs" />
-    <Compile Include="Migrations\201908222344113_Migration1.cs" />
-    <Compile Include="Migrations\201908222344113_Migration1.Designer.cs">
-      <DependentUpon>201908222344113_Migration1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -81,11 +77,6 @@
       <Project>{0E1401DB-BF03-405C-B62A-A9FD0F601915}</Project>
       <Name>SportsPromo.Interfaces</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\201908222344113_Migration1.resx">
-      <DependentUpon>201908222344113_Migration1.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

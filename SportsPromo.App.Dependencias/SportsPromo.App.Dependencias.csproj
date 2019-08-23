@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper, Version=9.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\packages\AutoMapper.9.0.0\lib\net461\AutoMapper.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -50,8 +53,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConfigureTodos.cs" />
-    <Compile Include="Manipuladores\ConfigureManipulador.cs" />
+    <Compile Include="Injecao\ConfigureTodos.cs" />
+    <Compile Include="Injecao\Manipuladores\ConfigureManipulador.cs" />
+    <Compile Include="Mapeamento\Configuracao\EsporteMapeamento.cs" />
+    <Compile Include="Mapeamento\Configuracao\GeneroMapeamento.cs" />
+    <Compile Include="Mapeamento\MapeamentoConfiguracao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -66,9 +72,17 @@
       <Project>{fb34689b-1100-4056-9605-532bd6eb16b5}</Project>
       <Name>SportsPromo.App.Interfaces</Name>
     </ProjectReference>
+    <ProjectReference Include="..\SportsPromo.App.Modelos\SportsPromo.App.Modelos.csproj">
+      <Project>{ef7def80-3c83-4dd7-9ccd-721d0c4e4c21}</Project>
+      <Name>SportsPromo.App.Modelos</Name>
+    </ProjectReference>
     <ProjectReference Include="..\SportsPromo.Dependencias\SportsPromo.Dependencias.csproj">
       <Project>{06264355-daf2-4bfa-aebc-eca6a2a88115}</Project>
       <Name>SportsPromo.Dependencias</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SportsPromo.Dominio.Modelos\SportsPromo.Dominio.Modelos.csproj">
+      <Project>{5b4f9d03-7aac-430c-9d97-7c579e0b892d}</Project>
+      <Name>SportsPromo.Dominio.Modelos</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
