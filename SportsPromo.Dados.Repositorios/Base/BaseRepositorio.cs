@@ -1,4 +1,6 @@
-﻿using SportsPromo.Interfaces.Dados.Contextos;
+﻿using SportsPromo.Comum.Dados;
+using SportsPromo.Dominio.Modelos;
+using SportsPromo.Interfaces.Dados.Contextos;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;

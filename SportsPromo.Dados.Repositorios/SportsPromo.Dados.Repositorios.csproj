@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Base\BaseRepositorio.cs" />
+    <Compile Include="ChecagemRepositorio.cs" />
     <Compile Include="EsporteRepositorio.cs" />
     <Compile Include="GeneroRepositorio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

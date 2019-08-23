@@ -15,7 +15,7 @@ namespace SportsPromo.Dominio.Modelos
 
         public virtual Receptor Receptor { get; set; }
 
-        public string ChecagemEm { get; set; }
+        public DateTime ChecagemEm { get; set; }
 
         public string ChecagemRfid { get; set; }
     }
