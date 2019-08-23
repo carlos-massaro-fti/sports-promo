@@ -100,7 +100,7 @@ namespace SportsPromo.Dominio.Servicos
                 yield return new ValidationResult("A idade minima não pode ser menor que a idade maxima", new string[] { "CategoriaIdadeMin", "CategoriaIdadeMax" });
             }
 
-            if (instancia.CategoriaGeneroId > 0)
+            if (!(instancia.CategoriaGeneroId > 0))
             {
                 yield return new ValidationResult("Favor selecionar um genero", new string[] { "CategoriaGeneroId" });
             }

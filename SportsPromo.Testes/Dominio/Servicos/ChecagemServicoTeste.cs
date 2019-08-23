@@ -80,7 +80,7 @@ namespace SportsPromo.Testes.Dominio.Servicos
         public void PegarTeste()
         {
 
-            var instancia = new Checagem() { ChecagemEm = DateTime.Now };
+            var instancia = new Checagem() { ChecagemEm = DateTime.Now, ChecagemRfid="AISIM" };
             try
             {
                 var result = ChecagemServico.Adicionar(instancia);

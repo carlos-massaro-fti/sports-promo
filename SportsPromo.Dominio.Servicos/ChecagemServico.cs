@@ -135,13 +135,19 @@ namespace SportsPromo.Dominio.Servicos
 
         public IEnumerable<ValidationResult> Validar(Checagem instancia)
         {
-            if (DateTime.Now - instancia.ChecagemEm > TimeSpan.FromHours(1) )
+            if (DateTime.Now - instancia.ChecagemEm > TimeSpan.FromHours(1))
             {
                 yield return new ValidationResult("Hora inválida", new string[] { "ChecagemEm" });
             }
+
             if (string.IsNullOrWhiteSpace(instancia.ChecagemRfid))
             {
                 yield return new ValidationResult("Rfid inválido", new string[] { "ChecagemRfid" });
+            }
+
+            if (!(instancia.ChecagemReceptorId > 0))
+            {
+                yield return new ValidationResult("Informe o Receptor", new string[] { "ChecagemReceptorId" });
             }
         }
 
