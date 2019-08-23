@@ -51,6 +51,7 @@
     <Compile Include="Base\BaseRepositorio.cs" />
     <Compile Include="EsporteRepositorio.cs" />
     <Compile Include="GeneroRepositorio.cs" />
+    <Compile Include="MarcoRepositorio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReceptorRepositorio.cs" />
   </ItemGroup>
