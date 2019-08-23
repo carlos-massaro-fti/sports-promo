@@ -68,6 +68,7 @@
     <Compile Include="Dominio\Servicos\CategoriaServicoTeste.cs" />
     <Compile Include="Dominio\Servicos\ChecagemServicoTeste.cs" />
     <Compile Include="Dominio\Servicos\EsporteServicoTeste.cs" />
+    <Compile Include="Dominio\Servicos\MarcoServicoTeste.cs" />
     <Compile Include="Dominio\Servicos\ReceptorServicoTeste.cs" />
     <Compile Include="Dominio\Servicos\GeneroServicoTeste.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
