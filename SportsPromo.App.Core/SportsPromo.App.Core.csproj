@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Manipuladores\EsporteManipulador.cs" />
     <Compile Include="Manipuladores\GeneroManipulador.cs" />
+    <Compile Include="Manipuladores\MarcoManipulador.cs" />
     <Compile Include="Mapa\EsporteMapeamento.cs" />
     <Compile Include="Mapa\GeneroMapeamento.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
