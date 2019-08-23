@@ -3,7 +3,7 @@ namespace SportsPromo.Dados.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Review : DbMigration
+    public partial class Migration1 : DbMigration
     {
         public override void Up()
         {
@@ -67,13 +67,25 @@ namespace SportsPromo.Dados.Migrations
                         ProvaId = c.Long(nullable: false, identity: true),
                         ProvaEsporteId = c.Long(nullable: false),
                         ProvaComecaEm = c.DateTime(nullable: false),
-                        ProvaEventoId = c.String(),
-                        ProvaEvento = c.Long(nullable: false),
+                        ProvaLocal = c.String(),
+                        ProvaEventoId = c.Long(nullable: false),
+                        Esporte_EsporteId = c.Long(),
                         Evento_EventoId = c.Long(),
                     })
                 .PrimaryKey(t => t.ProvaId)
+                .ForeignKey("dbo.ESPORTE", t => t.Esporte_EsporteId)
                 .ForeignKey("dbo.EVENTO", t => t.Evento_EventoId)
+                .Index(t => t.Esporte_EsporteId)
                 .Index(t => t.Evento_EventoId);
+            
+            CreateTable(
+                "dbo.ESPORTE",
+                c => new
+                    {
+                        ESPORTE_ID = c.Long(nullable: false, identity: true),
+                        ESPORTE_NOME = c.String(nullable: false, maxLength: 256),
+                    })
+                .PrimaryKey(t => t.ESPORTE_ID);
             
             CreateTable(
                 "dbo.EVENTO",
@@ -117,7 +129,7 @@ namespace SportsPromo.Dados.Migrations
                     {
                         CHECAGEM_ID = c.Long(nullable: false, identity: true),
                         ChecagemReceptorId = c.Long(nullable: false),
-                        CHECAGEM_EM = c.String(nullable: false, maxLength: 256),
+                        CHECAGEM_EM = c.DateTime(nullable: false),
                         CHECAGEM_RFID = c.String(nullable: false, maxLength: 256),
                     })
                 .PrimaryKey(t => t.CHECAGEM_ID)
@@ -125,13 +137,19 @@ namespace SportsPromo.Dados.Migrations
                 .Index(t => t.ChecagemReceptorId);
             
             CreateTable(
-                "dbo.ESPORTE",
+                "dbo.PROVA_TEM_CATEGORIA",
                 c => new
                     {
-                        ESPORTE_ID = c.Long(nullable: false, identity: true),
-                        ESPORTE_NOME = c.String(nullable: false, maxLength: 256),
+                        ProvaCategoriaId = c.Long(nullable: false),
+                        CategoriaProvaId = c.Long(nullable: false),
+                        Categoria_CategoriaId = c.Long(),
+                        Prova_ProvaId = c.Long(),
                     })
-                .PrimaryKey(t => t.ESPORTE_ID);
+                .PrimaryKey(t => new { t.ProvaCategoriaId, t.CategoriaProvaId })
+                .ForeignKey("dbo.CATEGORIA", t => t.Categoria_CategoriaId)
+                .ForeignKey("dbo.Provas", t => t.Prova_ProvaId)
+                .Index(t => t.Categoria_CategoriaId)
+                .Index(t => t.Prova_ProvaId);
             
             CreateTable(
                 "dbo.USUARIO",
@@ -153,24 +171,31 @@ namespace SportsPromo.Dados.Migrations
             DropForeignKey("dbo.INSCRICAO", "INSCRICAO_GENERO_ID", "dbo.GENERO");
             DropForeignKey("dbo.INSCRICAO", "INSCRICAO_EQUIPE_ID", "dbo.EQUIPE");
             DropForeignKey("dbo.EQUIPE", "EquipeProvaId", "dbo.Provas");
+            DropForeignKey("dbo.PROVA_TEM_CATEGORIA", "Prova_ProvaId", "dbo.Provas");
+            DropForeignKey("dbo.PROVA_TEM_CATEGORIA", "Categoria_CategoriaId", "dbo.CATEGORIA");
             DropForeignKey("dbo.MARCO", "MarcoReceptorId", "dbo.RECEPTOR");
             DropForeignKey("dbo.CHECAGEM", "ChecagemReceptorId", "dbo.RECEPTOR");
             DropForeignKey("dbo.MARCO", "MarcoProvaId", "dbo.Provas");
             DropForeignKey("dbo.Provas", "Evento_EventoId", "dbo.EVENTO");
+            DropForeignKey("dbo.Provas", "Esporte_EsporteId", "dbo.ESPORTE");
+            DropIndex("dbo.PROVA_TEM_CATEGORIA", new[] { "Prova_ProvaId" });
+            DropIndex("dbo.PROVA_TEM_CATEGORIA", new[] { "Categoria_CategoriaId" });
             DropIndex("dbo.CHECAGEM", new[] { "ChecagemReceptorId" });
             DropIndex("dbo.MARCO", new[] { "MarcoReceptorId" });
             DropIndex("dbo.MARCO", new[] { "MarcoProvaId" });
             DropIndex("dbo.Provas", new[] { "Evento_EventoId" });
+            DropIndex("dbo.Provas", new[] { "Esporte_EsporteId" });
             DropIndex("dbo.EQUIPE", new[] { "EquipeProvaId" });
             DropIndex("dbo.INSCRICAO", new[] { "INSCRICAO_GENERO_ID" });
             DropIndex("dbo.INSCRICAO", new[] { "INSCRICAO_EQUIPE_ID" });
             DropIndex("dbo.CATEGORIA", new[] { "CategoriaGeneroId" });
             DropTable("dbo.USUARIO");
-            DropTable("dbo.ESPORTE");
+            DropTable("dbo.PROVA_TEM_CATEGORIA");
             DropTable("dbo.CHECAGEM");
             DropTable("dbo.RECEPTOR");
             DropTable("dbo.MARCO");
             DropTable("dbo.EVENTO");
+            DropTable("dbo.ESPORTE");
             DropTable("dbo.Provas");
             DropTable("dbo.EQUIPE");
             DropTable("dbo.INSCRICAO");

@@ -65,6 +65,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dominio\Servicos\CategoriaServicoTeste.cs" />
+    <Compile Include="Dominio\Servicos\ChecagemServicoTeste.cs" />
     <Compile Include="Dominio\Servicos\EsporteServicoTeste.cs" />
     <Compile Include="Dominio\Servicos\MarcoServicoTeste.cs" />
     <Compile Include="Dominio\Servicos\ReceptorServicoTeste.cs" />

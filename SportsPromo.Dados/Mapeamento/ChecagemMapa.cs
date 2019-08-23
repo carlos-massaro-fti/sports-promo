@@ -23,7 +23,6 @@ namespace SportsPromo.Dados.Mapeamento
 
             Property(e => e.ChecagemEm)
                 .HasColumnName("CHECAGEM_EM")
-                .HasMaxLength(256)
                 .IsRequired();
 
             Property(e => e.ChecagemRfid)
