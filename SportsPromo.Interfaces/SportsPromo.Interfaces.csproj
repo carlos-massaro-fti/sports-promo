@@ -51,6 +51,7 @@
     <Compile Include="Dados\Contextos\ISportsPromoContexto.cs" />
     <Compile Include="Dados\Repositorios\ICategoriaRepositorio.cs" />
     <Compile Include="Dados\Repositorios\IEsporteRepositorio.cs" />
+    <Compile Include="Dados\Repositorios\IEventoRepositorio.cs" />
     <Compile Include="Dados\Repositorios\IProvaRepositorio.cs" />
     <Compile Include="Dados\Repositorios\IGeneroRepositorio.cs" />
     <Compile Include="Dados\Repositorios\IReceptorRepositorio.cs" />
@@ -58,6 +59,7 @@
     <Compile Include="Dominio\Servicos\IEquipeServico.cs" />
     <Compile Include="Dominio\Servicos\IChecagemServico.cs" />
     <Compile Include="Dominio\Servicos\IEsporteServico.cs" />
+    <Compile Include="Dominio\Servicos\IEventoServico.cs" />
     <Compile Include="Dominio\Servicos\IProvaServico.cs" />
     <Compile Include="Dominio\Servicos\IGeneroServico.cs" />
     <Compile Include="Dominio\Servicos\IMarcoServico.cs" />

@@ -19,6 +19,8 @@ namespace SportsPromo.Interfaces.Dados.Contextos
         DbSet<Prova> Provas { get; set; }
         DbSet<Receptor> Receptores { get; set; }
         DbSet<Checagem> Checagems { get; set; }
+        DbSet<Evento> Eventos { get; set; }
+
         DbSet<Usuario> Usuarios { get; set; }
         DbSet<TEntity> Set<TEntity>() where TEntity : class;
         int SaveChanges();

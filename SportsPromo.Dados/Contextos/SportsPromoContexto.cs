@@ -27,6 +27,8 @@ namespace SportsPromo.Dados.Contextos
         public DbSet<Receptor> Receptores { get; set; }
         public DbSet<Checagem> Checagems { get; set; }
         public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<Evento> Eventos { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new GeneroMapa());
