@@ -3,6 +3,7 @@ using SportsPromo.Dominio.Modelos;
 using SportsPromo.Interfaces.Dados.Contextos;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
