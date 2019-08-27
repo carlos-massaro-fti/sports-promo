@@ -110,9 +110,11 @@ namespace SportsPromo.Dominio.Servicos
             throw new NotImplementedException();
         }
 
-        public Task<Esporte> PegarAsync(long id)
+        public async Task<Esporte> PegarAsync(long id)
         {
-            throw new NotImplementedException();
+            var resultado = await EsporteRepositorio.PegarAsync(id);
+
+            return resultado;
         }
 
         public Task<bool> DeletarAsync(long id)

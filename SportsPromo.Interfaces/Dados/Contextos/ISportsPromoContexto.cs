@@ -24,6 +24,7 @@ namespace SportsPromo.Interfaces.Dados.Contextos
         DbSet<Usuario> Usuarios { get; set; }
         DbSet<TEntity> Set<TEntity>() where TEntity : class;
         int SaveChanges();
+        Task<int> SaveChangesAsync();
         DbEntityEntry<TEntity> Entry<TEntity>(TEntity entity) where TEntity : class;
     }
 }

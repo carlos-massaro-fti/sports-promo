@@ -21,6 +21,12 @@ namespace SportsPromo.App.WebSiteAdm
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
+                name: "DefaultApiGet",
+                routeTemplate: "api/{controller}/get/{id}",
+                defaults: new { id = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
                 name: "DefaultApiList",
                 routeTemplate: "api/{controller}/{action}/{page}/{sort}/{direction}",
                 defaults: new { page = 1, sort = RouteParameter.Optional, direction = RouteParameter.Optional }
@@ -29,6 +35,7 @@ namespace SportsPromo.App.WebSiteAdm
                 name: "DefaultApiList2",
                 routeTemplate: "api/{controller}/{action}"
             );*/
+
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",

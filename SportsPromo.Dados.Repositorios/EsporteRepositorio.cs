@@ -26,9 +26,13 @@ namespace SportsPromo.Dados.Repositorios
             return instancia.EsporteId;
         }
 
-        public Task<long> AdicionarAsync(Esporte instancia)
+        public async Task<long> AdicionarAsync(Esporte instancia)
         {
-            throw new NotImplementedException();
+            Contexto.Esportes.Add(instancia);
+
+            await Contexto.SaveChangesAsync();
+
+            return instancia.EsporteId;
         }
 
         public Task<bool> AlterarAsync(Esporte instancia)
@@ -163,9 +167,11 @@ namespace SportsPromo.Dados.Repositorios
             throw new NotImplementedException();
         }
 
-        public Task<Esporte> PegarAsync(long id)
+        public async Task<Esporte> PegarAsync(long id)
         {
-            throw new NotImplementedException();
+            var resultado = await Contexto.Esportes.FindAsync(id);
+
+            return resultado;
         }
     }
 }

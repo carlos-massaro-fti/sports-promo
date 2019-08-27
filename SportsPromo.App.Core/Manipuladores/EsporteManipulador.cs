@@ -26,11 +26,9 @@ namespace SportsPromo.App.Core.Manipuladores
         }
         public long Adicionar(EsporteApp instancia)
         {
-            var modelInstancia = new Esporte();
+            var modelDominio = Mapper.Map<Esporte>(instancia);
 
-            modelInstancia.EsporteNome = instancia.Nome;
-
-            var result = EsporteServico.Adicionar(modelInstancia);
+            var result = EsporteServico.Adicionar(modelDominio);
 
             return result;
         }
@@ -89,7 +87,7 @@ namespace SportsPromo.App.Core.Manipuladores
                 ContagemDePaginas = resultadoDominio.ContagemDePaginas,
                 ContagemDeLinhas = resultadoDominio.ContagemDeLinhas,
                 PaginaAtual = resultadoDominio.PaginaAtual,
-                Itens =  Mapper.Map<List<EsporteApp>>(resultadoDominio.Itens),
+                Itens = Mapper.Map<List<EsporteApp>>(resultadoDominio.Itens),
                 OrdemDirecao = resultadoDominio.OrdemDirecao
             };
 
@@ -157,9 +155,13 @@ namespace SportsPromo.App.Core.Manipuladores
             throw new NotImplementedException();
         }
 
-        public Task<EsporteApp> PegarAsync(long id)
+        public async Task<EsporteApp> PegarAsync(long id)
         {
-            throw new NotImplementedException();
+            var resultadoDominio = await EsporteServico.PegarAsync(id);
+
+            var resultado = Mapper.Map<EsporteApp>(resultadoDominio);
+
+            return resultado;
         }
 
         public Task<bool> DeletarAsync(long id)
@@ -172,9 +174,13 @@ namespace SportsPromo.App.Core.Manipuladores
             throw new NotImplementedException();
         }
 
-        public Task<long> AdicionarAsync(EsporteApp instancia)
+        public async Task<long> AdicionarAsync(EsporteApp instancia)
         {
-            throw new NotImplementedException();
+            var instanciaDominio = Mapper.Map<Esporte>(instancia);
+
+            var resultado = await EsporteServico.AdicionarAsync(instanciaDominio);
+
+            return resultado;
         }
 
         public Task<IEnumerable<ValidationResult>> ValidarAsync(EsporteApp instancia)

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
-using AutoMapper.Configuration;
 using SportsPromo.App.Core.Modelos;
 using SportsPromo.Dominio.Modelos;
 
