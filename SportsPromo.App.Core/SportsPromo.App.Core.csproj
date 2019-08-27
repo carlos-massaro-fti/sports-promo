@@ -48,6 +48,7 @@
     <Compile Include="Manipuladores\EsporteManipulador.cs" />
     <Compile Include="Manipuladores\GeneroManipulador.cs" />
     <Compile Include="Manipuladores\MarcoManipulador.cs" />
+    <Compile Include="Manipuladores\ReceptorManipulador.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

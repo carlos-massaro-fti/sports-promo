@@ -58,6 +58,7 @@
     <Compile Include="Mapeamento\Configuracao\CategoriaMapeamento.cs" />
     <Compile Include="Mapeamento\Configuracao\EsporteMapeamento.cs" />
     <Compile Include="Mapeamento\Configuracao\GeneroMapeamento.cs" />
+    <Compile Include="Mapeamento\Configuracao\ReceptorMapeamento.cs" />
     <Compile Include="Mapeamento\MapeamentoConfiguracao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
