@@ -21,6 +21,11 @@ namespace SportsPromo.App.WebSiteAdm
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
+                name: "DefaultApiPut",
+                routeTemplate: "api/{controller}/put/{id}",
+                defaults: new { id = RouteParameter.Optional }
+            );
+            config.Routes.MapHttpRoute(
                 name: "DefaultApiGet",
                 routeTemplate: "api/{controller}/get/{id}",
                 defaults: new { id = RouteParameter.Optional }

@@ -124,8 +124,9 @@ namespace SportsPromo.App.WebSiteAdm.Controllers
         }
 
         // PUT: api/Receptor/5
+        [HttpPut]
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> Put([FromUri] long id ,  ReceptorApp receptorApp)
+        public async Task<IHttpActionResult> Put([FromUri] long id, [FromBody] ReceptorApp receptorApp)
         {
             if (ModelState.IsValid)
             {
