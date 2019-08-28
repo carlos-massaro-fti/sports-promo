@@ -173,11 +173,54 @@ namespace SportsPromo.App.WebSiteAdm.Controllers
 
                         return Ok(checagemApp);*/
         }
-        //[HttpPut]
-        //[ResponseType(typeof(ChecagemApp))]
-        //public async Task<IHttpActionResult> Put([FromBody] ChecagemApp checagemApp)
-        //{
-            
-        //}
+        [HttpPut]
+        [ResponseType(typeof(ChecagemApp))]
+        public async Task<IHttpActionResult> Put([FromUri] long id, [FromBody] ChecagemApp checagemApp)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    checagemApp.Id = id;
+
+                    var resultado = await ChecagemManipulador.AlterarAsync(checagemApp);
+                    if (resultado == true)
+                    {
+                        var resultadoModel = await ChecagemManipulador.PegarAsync(checagemApp.Id);
+                        return Ok(resultadoModel);
+                    }
+                }
+                catch (AppException ex)
+                {
+                    ex.ValidationResults.ToList().ForEach(e =>
+                    {
+                        var localName = string.Empty;
+
+                        if (e.MemberNames.Any())
+                        {
+                            var memberName = e.MemberNames.First();
+                            switch (memberName)
+                            {
+                                case "ChecagemRfid":
+                                    localName = "Rfid";
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        if (string.IsNullOrEmpty(localName))
+                        {
+                            ModelState.AddModelError(string.Empty, e.ErrorMessage);
+                        }
+                        else
+                        {
+                            ModelState.AddModelError(localName, e.ErrorMessage);
+                        }
+                    });
+                    ModelState.AddModelError(string.Empty, "Problemas ao Alterar!");
+                }
+            }
+            return InternalServerError();
+        }
     }
 }
