@@ -1,0 +1,100 @@
+﻿@using SportsPromo.Comum.Html;
+@model SportsPromo.Comum.Dados.PaginadoOrdenado<SportsPromo.App.Core.Modelos.EsporteApp>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", "Esporte")
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.LinkDeOrdenacao(Model, e => e.Id)
+        </th>
+        <th>
+            @Html.LinkDeOrdenacao(Model, e => e.Nome)
+        </th>
+        @*<th>
+
+                <a href="@Url.Action("Index", new { page = Model.PaginaAtual , sort="Id", direction = Model.OrdemNome=="Id"? (Model.OrdemDirecao==0?1:0):0})">
+                    @Html.DisplayNameFor(model => model.Model.Id)
+                    @if (Model.OrdemNome == "Id")
+                    {
+                        <sub>
+                            @if (Model.OrdemDirecao == 0)
+                            {
+                                @Html.Raw("ASC")
+                            }
+                            else
+                            {
+                                @Html.Raw("DESC")
+                            }
+                        </sub>
+                    }
+                </a>
+            </th>*@
+        @*<th>
+                <a href="@Url.Action("Index", new { page = Model.PaginaAtual , sort="Nome", direction = Model.OrdemNome=="Nome"? (Model.OrdemDirecao==0?1:0):0})">
+                    @Html.DisplayNameFor(model => model.Model.Nome)
+                    @if (Model.OrdemNome == "Nome")
+                    {
+                        <sub>
+                            @if (Model.OrdemDirecao == 0)
+                            {
+                                @Html.Raw("ASC")
+                            }
+                            else
+                            {
+                                @Html.Raw("DESC")
+                            }
+                        </sub>
+                    }
+                </a>
+            </th>*@
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Itens)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<nav aria-label="Page navigation">
+    <ul class="pagination">
+        <li>
+            <a href="@Url.Action("Index", new { page = Model.PaginaAtual-1, sort = Model.OrdemNome,direction = Model.OrdemDirecao})" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+            </a>
+        </li>
+        @for (var numeroDePagina = 1; numeroDePagina <= Model.ContagemDePaginas; numeroDePagina++)
+        {
+            <li class="@(numeroDePagina==Model.PaginaAtual?"active":"")"><a href="@Url.Action("Index", new { page = numeroDePagina, sort = Model.OrdemNome,direction = Model.OrdemDirecao})">@numeroDePagina</a></li>
+        }
+        <li>
+            <a href="@Url.Action("Index", new { page = Model.PaginaAtual + 1, sort = Model.OrdemNome,direction = Model.OrdemDirecao})" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+            </a>
+        </li>
+    </ul>
+</nav>
+
+
