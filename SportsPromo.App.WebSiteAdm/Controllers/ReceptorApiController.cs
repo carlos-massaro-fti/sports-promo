@@ -11,27 +11,27 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using SportsPromo.App.Core.Modelos;
 using SportsPromo.App.Interfaces.Manipuladores;
+using SportsPromo.App.Modelos;
 using SportsPromo.App.WebSiteAdm.Models;
 using SportsPromo.Comum.Dados;
 using SportsPromo.Comum.Exceptions;
 
 namespace SportsPromo.App.WebSiteAdm.Controllers
 {
-    public class CategoriaApiController : ApiController
+    public class ReceptorApiController : ApiController
     {
-        protected readonly ICategoriaManipulador CategoriaManipulador;
+        protected readonly IReceptorManipulador ReceptorManipulador;
 
-        public CategoriaApiController(ICategoriaManipulador categoriaManipulador)
+        public ReceptorApiController(IReceptorManipulador receptorManipulador)
         {
-            CategoriaManipulador = categoriaManipulador;
+            ReceptorManipulador = receptorManipulador;
         }
-
-        // GET: api/CategoriaApps
+        // GET: api/Receptor
         [HttpGet]
         [ActionName("Index")]
         public async Task<HttpResponseMessage> Index([FromUri] int? page, [FromUri] string sort, [FromUri] int? direction)
         {
-            var consulta = new PaginadoOrdenado<CategoriaApp>()
+            var consulta = new PaginadoOrdenado<ReceptorApp>()
             {
                 PaginaAtual = page ?? 1,
                 ItensPorPagina = 6,
@@ -39,7 +39,7 @@ namespace SportsPromo.App.WebSiteAdm.Controllers
                 OrdemDirecao = direction ?? 0
             };
 
-            var resultado = await CategoriaManipulador.ListarAsync(consulta);
+            var resultado = await ReceptorManipulador.ListarAsync(consulta);
 
             var response = Request.CreateResponse(HttpStatusCode.OK, resultado.Itens.ToList());
 
@@ -58,12 +58,12 @@ namespace SportsPromo.App.WebSiteAdm.Controllers
             return response;
         }
 
-        // GET: api/CategoriaApps/5
+        // GET: api/Receptor/5
         [HttpGet]
-        [ResponseType(typeof(CategoriaApp))]
+        [ResponseType(typeof(ReceptorApp))]
         public async Task<IHttpActionResult> Get(long id)
         {
-            var resultado = await CategoriaManipulador.PegarAsync(id);
+            var resultado = await ReceptorManipulador.PegarAsync(id);
 
             if (resultado == null)
             {
@@ -73,56 +73,19 @@ namespace SportsPromo.App.WebSiteAdm.Controllers
             return Ok(resultado);
         }
 
-        // PUT: api/CategoriaApps/5
-        [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutCategoriaApp(long id, CategoriaApp categoriaApp)
-        {
-            throw new NotImplementedException();
-            /*
-                        if (!ModelState.IsValid)
-                        {
-                            return BadRequest(ModelState);
-                        }
-
-                        if (id != categoriaApp.Id)
-                        {
-                            return BadRequest();
-                        }
-
-                        db.Entry(categoriaApp).State = EntityState.Modified;
-
-                        try
-                        {
-                            await db.SaveChangesAsync();
-                        }
-                        catch (DbUpdateConcurrencyException)
-                        {
-                            if (!EsporteAppExists(id))
-                            {
-                                return NotFound();
-                            }
-                            else
-                            {
-                                throw;
-                            }
-                        }
-                        */
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
-        // POST: api/CategoriaApps
+        // POST: api/Receptor
         [HttpPost]
-        [ResponseType(typeof(CategoriaApp))]
-        public async Task<IHttpActionResult> Post([FromBody] CategoriaApp categoriaApp)
+        [ResponseType(typeof(ReceptorApp))]
+        public async Task<IHttpActionResult> Post([FromBody] ReceptorApp receptorApp)
         {
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var resultado = await CategoriaManipulador.AdicionarAsync(categoriaApp);
+                    var resultado = await ReceptorManipulador.AdicionarAsync(receptorApp);
                     if (resultado > 0)
                     {
-                        var resultadoModel = await CategoriaManipulador.PegarAsync(resultado);
+                        var resultadoModel = await ReceptorManipulador.PegarAsync(resultado);
                         return CreatedAtRoute("DefaultApi", new { action = "Get", id = resultado }, resultadoModel);
                     }
                 }
@@ -138,8 +101,8 @@ namespace SportsPromo.App.WebSiteAdm.Controllers
                             var memberName = e.MemberNames.First();
                             switch (memberName)
                             {
-                                case "CategoriaNome":
-                                    localName = "Nome";
+                                case "ReceptorCodigo":
+                                    localName = "Codigo";
                                     break;
                                 default:
                                     break;
@@ -160,22 +123,60 @@ namespace SportsPromo.App.WebSiteAdm.Controllers
             return InternalServerError();
         }
 
-        // DELETE: api/CategoriaApps/5
-        [ResponseType(typeof(CategoriaApp))]
-        public async Task<IHttpActionResult> DeleteCategoriaApp(long id)
+        // PUT: api/Receptor/5
+        [HttpPut]
+        [ResponseType(typeof(void))]
+        public async Task<IHttpActionResult> Put([FromUri] long id, [FromBody] ReceptorApp receptorApp)
         {
-            throw new NotImplementedException();
-            /*
-                        EsporteApp esporteApp = await db.CategoriaApps.FindAsync(id);
-                        if (categoriaApp == null)
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    receptorApp.Id = id;
+
+                    var resultado = await ReceptorManipulador.AlterarAsync(receptorApp);
+                    if (resultado == true)
+                    {
+                        var resultadoModel = await ReceptorManipulador.PegarAsync(receptorApp.Id);
+                        return Ok(resultadoModel);
+                    }
+                }
+                catch (AppException ex)
+                {
+                    ex.ValidationResults.ToList().ForEach(e =>
+                    {
+                        var localName = string.Empty;
+
+                        if (e.MemberNames.Any())
                         {
-                            return NotFound();
+                            var memberName = e.MemberNames.First();
+                            switch (memberName)
+                            {
+                                case "ReceptorCodigo":
+                                    localName = "Codigo";
+                                    break;
+                                default:
+                                    break;
+                            }
                         }
+                        if (string.IsNullOrEmpty(localName))
+                        {
+                            ModelState.AddModelError(string.Empty, e.ErrorMessage);
+                        }
+                        else
+                        {
+                            ModelState.AddModelError(localName, e.ErrorMessage);
+                        }
+                    });
+                    ModelState.AddModelError(string.Empty, "Problemas ao Alterar!");
+                }
+            }
+            return InternalServerError();
+        }
 
-                        db.EsporteApps.Remove(categoriaApp);
-                        await db.SaveChangesAsync();
-
-                        return Ok(categoriaApp);*/
+        // DELETE: api/Receptor/5
+        public void Delete(int id)
+        {
         }
     }
 }

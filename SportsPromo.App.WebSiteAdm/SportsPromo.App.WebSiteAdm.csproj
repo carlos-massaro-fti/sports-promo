@@ -203,6 +203,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategoriaApiController.cs" />
+    <Compile Include="Controllers\CategoriaController.cs" />
     <Compile Include="Controllers\ChecagemApiController.cs" />
     <Compile Include="Controllers\ChecagemController.cs" />
     <Compile Include="Controllers\MarcoApiController.cs" />
@@ -211,6 +212,7 @@
     <Compile Include="Controllers\GeneroController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ReceptorApiController.cs" />
     <Compile Include="Controllers\ReceptorController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -289,6 +291,7 @@
     <Content Include="Views\Esporte\Edit.cshtml" />
     <Content Include="Views\Esporte\Index.cshtml" />
     <Content Include="Views\Esporte\OnePage.cshtml" />
+    <Content Include="Views\Receptor\OnePage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
