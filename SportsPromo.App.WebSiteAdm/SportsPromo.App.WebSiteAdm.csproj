@@ -292,6 +292,7 @@
     <Content Include="Views\Esporte\Index.cshtml" />
     <Content Include="Views\Esporte\OnePage.cshtml" />
     <Content Include="Views\Receptor\OnePage.cshtml" />
+    <Content Include="Views\Checagem\OnePage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
