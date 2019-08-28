@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Manipuladores\ChecagemManipulador.cs" />
     <Compile Include="Manipuladores\EsporteManipulador.cs" />
     <Compile Include="Manipuladores\GeneroManipulador.cs" />
     <Compile Include="Manipuladores\MarcoManipulador.cs" />
@@ -73,6 +74,10 @@
     <ProjectReference Include="..\SportsPromo.Dominio.Modelos\SportsPromo.Dominio.Modelos.csproj">
       <Project>{5b4f9d03-7aac-430c-9d97-7c579e0b892d}</Project>
       <Name>SportsPromo.Dominio.Modelos</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SportsPromo.Dominio.Servicos\SportsPromo.Dominio.Servicos.csproj">
+      <Project>{CDA3D0D5-6BD2-4643-898C-A113D909ADD7}</Project>
+      <Name>SportsPromo.Dominio.Servicos</Name>
     </ProjectReference>
     <ProjectReference Include="..\SportsPromo.Interfaces\SportsPromo.Interfaces.csproj">
       <Project>{0e1401db-bf03-405c-b62a-a9fd0f601915}</Project>

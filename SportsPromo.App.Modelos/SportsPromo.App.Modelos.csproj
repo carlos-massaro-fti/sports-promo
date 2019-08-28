@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChecagemApp.cs" />
     <Compile Include="EsporteApp.cs" />
     <Compile Include="GeneroApp.cs" />
     <Compile Include="MarcoApp.cs" />
