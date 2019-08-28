@@ -204,6 +204,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CategoriaApiController.cs" />
     <Compile Include="Controllers\ChecagemApiController.cs" />
+    <Compile Include="Controllers\ChecagemController.cs" />
     <Compile Include="Controllers\MarcoApiController.cs" />
     <Compile Include="Controllers\EsporteApiController.cs" />
     <Compile Include="Controllers\EsporteController.cs" />
