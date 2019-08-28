@@ -2,36 +2,35 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
-using System.Web;
-using System.Web.Mvc;
+using System.Net.Http;
+using System.Threading.Tasks;
+using System.Web.Http;
+using System.Web.Http.Description;
 using SportsPromo.App.Core.Modelos;
 using SportsPromo.App.Interfaces.Manipuladores;
 using SportsPromo.App.WebSiteAdm.Models;
 using SportsPromo.Comum.Dados;
 using SportsPromo.Comum.Exceptions;
-using SportsPromo.Comum.Helpers;
 
 namespace SportsPromo.App.WebSiteAdm.Controllers
 {
-    public class CategoriaApiController : Controller
+    public class CategoriaApiController : ApiController
     {
         protected readonly ICategoriaManipulador CategoriaManipulador;
+
         public CategoriaApiController(ICategoriaManipulador categoriaManipulador)
         {
             CategoriaManipulador = categoriaManipulador;
         }
-        public ActionResult OnePage()
+
+        // GET: api/CategoriaApps
+        [HttpGet]
+        [ActionName("Index")]
+        public async Task<HttpResponseMessage> Index([FromUri] int? page, [FromUri] string sort, [FromUri] int? direction)
         {
-            return View();
-        }
-
-
-        // GET: CategoriaApps
-        public ActionResult Index(int? page, string sort, int? direction)
-        {
-
             var consulta = new PaginadoOrdenado<CategoriaApp>()
             {
                 PaginaAtual = page ?? 1,
@@ -40,88 +39,91 @@ namespace SportsPromo.App.WebSiteAdm.Controllers
                 OrdemDirecao = direction ?? 0
             };
 
-            var result = CategoriaManipulador.Listar(consulta);
+            var resultado = await CategoriaManipulador.ListarAsync(consulta);
 
-            return View(result);
+            var response = Request.CreateResponse(HttpStatusCode.OK, resultado.Itens.ToList());
+
+            response.Headers.Add("X-PAGE_SIZE", resultado.ItensPorPagina.ToString());
+
+            response.Headers.Add("X-PAGE_CURRENT", resultado.PaginaAtual.ToString());
+
+            response.Headers.Add("X-PAGE_COUNT", resultado.ContagemDePaginas.ToString());
+
+            response.Headers.Add("X-ITEM_COUNT", resultado.ContagemDeLinhas.ToString());
+
+            response.Headers.Add("X-SORT", resultado.OrdemNome);
+
+            response.Headers.Add("X-SORT_DIRECTION", resultado.OrdemDirecao.ToString());
+
+            return response;
         }
 
-        // GET: CategoriaApps/Details/5
-        public ActionResult Details(long? id)
+        // GET: api/CategoriaApps/5
+        [HttpGet]
+        [ResponseType(typeof(CategoriaApp))]
+        public async Task<IHttpActionResult> Get(long id)
         {
+            var resultado = await CategoriaManipulador.PegarAsync(id);
 
-
-
-            if (id == null)
+            if (resultado == null)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                return NotFound();
             }
-            var CategoriaApp = CategoriaManipulador.Pegar(id.Value);
 
-            if (CategoriaApp == null)
-            {
-                return HttpNotFound();
-            }
-            return View(CategoriaApp);
+            return Ok(resultado);
         }
 
-        // GET: CategoriaApps/Create
-        public ActionResult Create()
+        // PUT: api/CategoriaApps/5
+        [ResponseType(typeof(void))]
+        public async Task<IHttpActionResult> PutCategoriaApp(long id, CategoriaApp categoriaApp)
         {
-            return View();
+            throw new NotImplementedException();
+            /*
+                        if (!ModelState.IsValid)
+                        {
+                            return BadRequest(ModelState);
+                        }
+
+                        if (id != categoriaApp.Id)
+                        {
+                            return BadRequest();
+                        }
+
+                        db.Entry(categoriaApp).State = EntityState.Modified;
+
+                        try
+                        {
+                            await db.SaveChangesAsync();
+                        }
+                        catch (DbUpdateConcurrencyException)
+                        {
+                            if (!EsporteAppExists(id))
+                            {
+                                return NotFound();
+                            }
+                            else
+                            {
+                                throw;
+                            }
+                        }
+                        */
+            return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: CategoriaApps/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: api/CategoriaApps
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nome")] CategoriaApp CategoriaApp)
+        [ResponseType(typeof(CategoriaApp))]
+        public async Task<IHttpActionResult> Post([FromBody] CategoriaApp categoriaApp)
         {
-            if (ModelState.IsValid)
-            {
-                var result = CategoriaManipulador.Adicionar(CategoriaApp);
-                if (result > 0)
-                {
-                    return RedirectToAction("Index");
-                }
-            }
-
-            return View(CategoriaApp);
-        }
-
-        // GET: CategoriaApps/Edit/5
-        public ActionResult Edit(long? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            var CategoriaApp = CategoriaManipulador.Pegar(id.Value);
-
-            if (CategoriaApp == null)
-            {
-                return HttpNotFound();
-            }
-            return View(CategoriaApp);
-        }
-
-        // POST: CategoriaApps/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nome")] CategoriaApp CategoriaApp)
-        {
-
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var result = CategoriaManipulador.Alterar(CategoriaApp);
-                    if (result)
+                    var resultado = await CategoriaManipulador.AdicionarAsync(categoriaApp);
+                    if (resultado > 0)
                     {
-                        return RedirectToAction("Index");
+                        var resultadoModel = await CategoriaManipulador.PegarAsync(resultado);
+                        return CreatedAtRoute("DefaultApi", new { action = "Get", id = resultado }, resultadoModel);
                     }
                 }
                 catch (AppException ex)
@@ -153,37 +155,27 @@ namespace SportsPromo.App.WebSiteAdm.Controllers
                         }
                     });
                     ModelState.AddModelError(string.Empty, "Problemas ao Alterar!");
-
                 }
             }
-            return View(CategoriaApp);
+            return InternalServerError();
         }
 
-        // GET: CategoriaApps/Delete/5
-        public ActionResult Delete(long? id)
+        // DELETE: api/CategoriaApps/5
+        [ResponseType(typeof(CategoriaApp))]
+        public async Task<IHttpActionResult> DeleteCategoriaApp(long id)
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+            throw new NotImplementedException();
+            /*
+                        EsporteApp esporteApp = await db.CategoriaApps.FindAsync(id);
+                        if (categoriaApp == null)
+                        {
+                            return NotFound();
+                        }
 
-            var CategoriaApp = CategoriaManipulador.Pegar(id.Value);
+                        db.EsporteApps.Remove(categoriaApp);
+                        await db.SaveChangesAsync();
 
-            if (CategoriaApp == null)
-            {
-                return HttpNotFound();
-            }
-            return View(CategoriaApp);
-        }
-
-        // POST: CategoriaApps/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(long id)
-        {
-            var result = CategoriaManipulador.Deletar(id);
-
-            return RedirectToAction("Index");
+                        return Ok(categoriaApp);*/
         }
     }
 }
