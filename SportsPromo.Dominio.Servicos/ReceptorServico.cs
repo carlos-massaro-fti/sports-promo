@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SportsPromo.Comum.Exceptions;
+using SportsPromo.Comum.Dados;
 
 namespace SportsPromo.Dominio.Servicos
 {
@@ -82,12 +83,60 @@ namespace SportsPromo.Dominio.Servicos
         {
             if (instancia.ReceptorCodigo.Length > 256)
             {
-                yield return new ValidationResult("O código não pode ter mais de 256 caracteres", new string[] { "ReceptorCodigo" });
+                yield return new ValidationResult("O código do receptor não pode ter mais de 256 caracteres", new string[] { "ReceptorCodigo" });
             }
             if (instancia.ReceptorCodigo.Length < 3)
             {
-                yield return new ValidationResult("O código não pode ter menos de 3 caracteres", new string[] { "ReceptorCodigo" });
+                yield return new ValidationResult("O código do recptor não pode ter menos de 3 caracteres", new string[] { "ReceptorCodigo" });
             }
+        }
+
+        public PaginadoOrdenado<Receptor> Listar(PaginadoOrdenado<Receptor> consulta)
+        {
+            var result = ReceptorRepositorio.Listar(consulta);
+
+            return result;
+        }
+
+        public async Task<PaginadoOrdenado<Receptor>> ListarAsync(PaginadoOrdenado<Receptor> consulta)
+        {
+            var resultado = await ReceptorRepositorio.ListarAsync(consulta);
+
+            return resultado;
+        }
+
+        public Task<List<Receptor>> ListarAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<Receptor> PegarAsync(long id)
+        {
+            var resultado = await ReceptorRepositorio.PegarAsync(id);
+
+            return resultado;
+        }
+
+        public Task<bool> DeletarAsync(long id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<bool> AlterarAsync(Receptor instancia)
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<long> AdicionarAsync(Receptor instancia)
+        {
+            var resultado = await ReceptorRepositorio.AdicionarAsync(instancia);
+
+            return resultado;
+        }
+
+        public async Task<IEnumerable<ValidationResult>> ValidarAsync(Receptor instancia)
+        {
+            throw new NotImplementedException();
         }
     }
 }

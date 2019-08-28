@@ -3,10 +3,12 @@ using SportsPromo.Dominio.Modelos;
 using SportsPromo.Interfaces.Dados.Contextos;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using EntityState = System.Data.Entity.EntityState;
 
 namespace SportsPromo.Dados.Repositorios
 {
@@ -24,7 +26,7 @@ namespace SportsPromo.Dados.Repositorios
 
         public virtual bool Alterar(T instancia)
         {
-            Contexto.Entry(instancia).State = EntityState.Modified;
+            Contexto.Entry(instancia).State = System.Data.Entity.EntityState.Modified;
 
             var result = Contexto.SaveChanges() > 0;
 
