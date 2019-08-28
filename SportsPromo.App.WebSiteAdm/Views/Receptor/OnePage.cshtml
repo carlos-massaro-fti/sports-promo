@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", "Receptor")
+</p>
+@*<script>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+
+    </script>*@
+
+<table class="table" id="tabela-receptor">
+    <thead>
+        <tr>
+            <th data-key="Id" data-sort="true">
+                Id
+            </th>
+            <th data-key="Codigo" data-sort="true">
+                Codigo
+            </th>
+            <th>
+                Personalizada
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+<nav aria-label="Page navigation" id="tabela-receptor-paginador"></nav>
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/GridJs.js")
+
+    <script>
+            $(document).ready(function () {
+                var gridOptions = {
+                    Url: "https://localhost:44331/api/apireceptor/index/",
+                    Colunas: [
+                        {
+                            NomeDoCampo: "Id",
+                            AtributosHtml: "",
+                            CallbackDeRenderizacao: function (itemLinha, atributoColuna) {
+                                var texto = itemLinha[atributoColuna];
+                                var celula = $("<td />").addClass("text-right").append(texto);
+                                return celula;
+                            }
+                        },
+                        "Codigo",
+                        {
+                            CallbackDeRenderizacao: function (itemLinha, atributoColuna) {
+                                var texto = `${itemLinha.Id} - ${itemLinha.Nome}`;
+                                var celula = $("<td />").addClass("text-right").append(texto);
+                                return celula;
+                            }
+                        }
+                    ],
+                    ConteinerDoPaginador: "#tabela-receptor-paginador"
+                };
+                SetupGrid("#tabela-receptor", gridOptions);
+            });
+
+
+    </script>
+
+}
