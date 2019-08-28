@@ -4,6 +4,7 @@ using SportsPromo.Interfaces.Dados.Contextos;
 using SportsPromo.Interfaces.Dados.Repositorios;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,9 +25,13 @@ namespace SportsPromo.Dados.Repositorios
 
             return instancia.ChecagemId;
         }
-        public Task<long> AdicionarAsync(Checagem instancia)
+        public async Task<long> AdicionarAsync(Checagem instancia)
         {
-            throw new NotImplementedException();
+            Contexto.Checagems.Add(instancia);
+
+            await Contexto.SaveChangesAsync();
+
+            return instancia.ChecagemId;
         }
 
         public Task<bool> AlterarAsync(Checagem instancia)
@@ -41,12 +46,111 @@ namespace SportsPromo.Dados.Repositorios
 
         public PaginadoOrdenado<Checagem> Listar(PaginadoOrdenado<Checagem> consulta)
         {
-            throw new NotImplementedException();
+            var resultado = new PaginadoOrdenado<Checagem>()
+            {
+                ItensPorPagina = consulta.ItensPorPagina,
+                PaginaAtual = consulta.PaginaAtual,
+                OrdemDirecao = consulta.OrdemDirecao,
+                OrdemNome = consulta.OrdemNome,
+            };
+
+            var query = Contexto.Checagems.AsQueryable();
+
+
+            resultado.SetTotalDeLinhas(query.Count());
+
+            if (consulta.OrdemDirecao == 0)
+            {
+                switch (consulta.OrdemNome)
+                {
+                    case "ChecagemRfid":
+                        query = query.OrderBy(e => e.ChecagemRfid);
+                        break;
+                    case "ChecagemId":
+                    default:
+                        query = query.OrderBy(e => e.ChecagemId);
+                        break;
+                }
+            }
+            else
+            {
+                switch (consulta.OrdemNome)
+                {
+                    case "ChecagemRfid":
+                        query = query.OrderByDescending(e => e.ChecagemRfid);
+                        break;
+                    case "ChecagemId":
+                    default:
+                        query = query.OrderByDescending(e => e.ChecagemId);
+                        break;
+                }
+            }
+            if (!(query is IOrderedQueryable))
+            {
+                query = query.OrderBy(e => e.ChecagemId);
+            }
+
+            query = query
+                .Skip(resultado.ItensPorPagina * (resultado.PaginaAtual - 1))
+                .Take(resultado.ItensPorPagina);
+
+            resultado.Itens = query;
+
+            return resultado;
         }
 
-        public Task<PaginadoOrdenado<Checagem>> ListarAsync(PaginadoOrdenado<Checagem> consulta)
+        public async Task<PaginadoOrdenado<Checagem>> ListarAsync(PaginadoOrdenado<Checagem> consulta)
         {
-            throw new NotImplementedException();
+            var resultado = new PaginadoOrdenado<Checagem>()
+            {
+                ItensPorPagina = consulta.ItensPorPagina,
+                PaginaAtual = consulta.PaginaAtual,
+                OrdemDirecao = consulta.OrdemDirecao,
+                OrdemNome = consulta.OrdemNome,
+            };
+            var query = Contexto.Checagems.AsQueryable();
+
+
+            resultado.SetTotalDeLinhas(await query.CountAsync());
+
+            if (consulta.OrdemDirecao == 0)
+            {
+                switch (consulta.OrdemNome)
+                {
+                    case "ChecagemRfid":
+                        query = query.OrderBy(e => e.ChecagemRfid);
+                        break;
+                    case "ChecagemId":
+                    default:
+                        query = query.OrderBy(e => e.ChecagemId);
+                        break;
+                }
+            }
+            else
+            {
+                switch (consulta.OrdemNome)
+                {
+                    case "ChecagemRfid":
+                        query = query.OrderByDescending(e => e.ChecagemRfid);
+                        break;
+                    case "ChecagemId":
+                    default:
+                        query = query.OrderByDescending(e => e.ChecagemId);
+                        break;
+                }
+            }
+            if (!(query is IOrderedQueryable))
+            {
+                query = query.OrderBy(e => e.ChecagemId);
+            }
+
+            query = query
+                .Skip(resultado.ItensPorPagina * (resultado.PaginaAtual - 1))
+                .Take(resultado.ItensPorPagina);
+
+            resultado.Itens = query;
+
+            return resultado;
         }
 
         public Task<List<Checagem>> ListarAsync()

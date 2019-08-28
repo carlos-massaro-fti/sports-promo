@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CategoriaApp.cs" />
+    <Compile Include="ChecagemApp.cs" />
     <Compile Include="EsporteApp.cs" />
     <Compile Include="GeneroApp.cs" />
     <Compile Include="MarcoApp.cs" />

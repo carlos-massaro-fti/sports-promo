@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Manipuladores\ICategoriaManipulador.cs" />
+    <Compile Include="Manipuladores\IChecagemManipulador.cs" />
     <Compile Include="Manipuladores\IEsporteManipulador.cs" />
     <Compile Include="Manipuladores\IGeneroManipulador.cs" />
     <Compile Include="Manipuladores\IMarcoManipulador.cs" />

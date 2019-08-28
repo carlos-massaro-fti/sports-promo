@@ -20,6 +20,7 @@ namespace SportsPromo.App.Dependencias.Mapeamento
                 GeneroMapeamento.Configure(cfg);
                 ReceptorMapeamento.Configure(cfg);
                 CategoriaMapeamento.Configure(cfg);
+                ChecagemMapeamento.Configure(cfg);
             });
             container.RegisterInstance<IMapper>(new Mapper(configuracao));
         }
