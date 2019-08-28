@@ -110,16 +110,16 @@ namespace SportsPromo.App.WebSiteAdm.Controllers
         // POST: EsporteApps/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPut]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nome")] EsporteApp EsporteApp)
+        public ActionResult Edit([Bind(Include = "Id,Nome")] EsporteApp esporteApp)
         {
 
             if (ModelState.IsValid)
             {
                 try
                 {
-                    var result = EsporteManipulador.Alterar(EsporteApp);
+                    var result = EsporteManipulador.Alterar(esporteApp);
                     if (result)
                     {
                         return RedirectToAction("Index");
@@ -157,7 +157,7 @@ namespace SportsPromo.App.WebSiteAdm.Controllers
 
                 }
             }
-            return View(EsporteApp);
+            return View(esporteApp);
         }
 
         // GET: EsporteApps/Delete/5

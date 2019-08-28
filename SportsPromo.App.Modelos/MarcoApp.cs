@@ -9,15 +9,15 @@ namespace SportsPromo.App.Modelos
     public class MarcoApp
     {
         [System.ComponentModel.DataAnnotations.Display(ShortName = "ID do Marco", Name = "ID do Marco")]
-        public long Id { get; }
+        public long Id { get; set; }
         
-        public decimal MarcoLat { get; set; }
-        public decimal MarcoLon { get; set; }
-        public long MarcoProvaId { get; set; }
+        public decimal Lat { get; set; }
+        public decimal Lon { get; set; }
+        public long ProvaId { get; set; }
 
         public Prova Prova { get; set; }
 
-        public long MarcoReceptorId { set; get; }
+        public long ReceptorId { set; get; }
 
         public Receptor Receptor { set; get; }
 

@@ -2,6 +2,7 @@
 using SportsPromo.App.Modelos;
 using SportsPromo.Comum.Dados;
 using SportsPromo.Dominio.Modelos;
+using SportsPromo.Interfaces.Dominio.Servicos;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -13,9 +14,9 @@ namespace SportsPromo.App.Core.Manipuladores
 {
     public class MarcoManipulador : IMarcoManipulador
     {
-        protected IMarcoManipulador MarcoServico { get; }
+        protected IMarcoServico MarcoServico { get; }
 
-        public MarcoManipulador(IMarcoManipulador marcoServico)
+        public MarcoManipulador(IMarcoServico marcoServico)
         {
             MarcoServico = marcoServico;
         }
@@ -106,55 +107,61 @@ namespace SportsPromo.App.Core.Manipuladores
             throw new NotImplementedException();
         }
 
-        //public async Task<PaginadoOrdenado<MarcoApp>> ListarAsync(PaginadoOrdenado<MarcoApp> consulta)
-        //{
+        public async Task<PaginadoOrdenado<MarcoApp>> ListarAsync(PaginadoOrdenado<MarcoApp> consulta)
+        {
 
-        //    //var consultaDominio = new PaginadoOrdenado<Esporte>()
-        //    //{
-        //    //    ItensPorPagina = consulta.ItensPorPagina,
-        //    //    PaginaAtual = consulta.PaginaAtual,
-        //    //    OrdemDirecao = consulta.OrdemDirecao,
-        //    //};
+            var consultaDominio = new PaginadoOrdenado<Marco>()
+            {
+                ItensPorPagina = consulta.ItensPorPagina,
+                PaginaAtual = consulta.PaginaAtual,
+                OrdemDirecao = consulta.OrdemDirecao,
+            };
 
-        //    //switch (consulta.OrdemNome)
-        //    //{
-        //    //    case "Id":
-        //    //        consultaDominio.OrdemNome = "EsporteId";
-        //    //        break;
-        //    //    case "Nome":
-        //    //        consultaDominio.OrdemNome = "EsporteNome";
-        //    //        break;
-        //    //}
+            switch (consulta.OrdemNome)
+            {
+                case "Id":
+                    consultaDominio.OrdemNome = "MarcoId";
+                    break;
+                case "Lat":
+                    consultaDominio.OrdemNome = "MarcoLat";
+                    break;
+                case "Lon":
+                    consultaDominio.OrdemNome = "MarcoLon";
+                    break;
+            }
 
-        //    //var resultadoDominio = await EsporteServico.ListarAsync(consultaDominio);
+            var resultadoDominio = await MarcoServico.ListarAsync(consultaDominio);
 
-        //    //var resultado = new PaginadoOrdenado<MarcoApp>()
-        //    //{
-        //    //    ItensPorPagina = resultadoDominio.ItensPorPagina,
-        //    //    ContagemDePaginas = resultadoDominio.ContagemDePaginas,
-        //    //    ContagemDeLinhas = resultadoDominio.ContagemDeLinhas,
-        //    //    PaginaAtual = resultadoDominio.PaginaAtual,
-        //    //    Itens = resultadoDominio.Itens.Select(e => new MarcoApp()
-        //    //    {
-        //    //        Id = e.EsporteId,
-        //    //        Nome = e.EsporteNome
-        //    //    }),
-        //    //    OrdemDirecao = resultadoDominio.OrdemDirecao
-        //    //};
+            var resultado = new PaginadoOrdenado<MarcoApp>()
+            {
+                ItensPorPagina = resultadoDominio.ItensPorPagina,
+                ContagemDePaginas = resultadoDominio.ContagemDePaginas,
+                ContagemDeLinhas = resultadoDominio.ContagemDeLinhas,
+                PaginaAtual = resultadoDominio.PaginaAtual,
+                Itens = resultadoDominio.Itens.Select(e => new MarcoApp()
+                {
+                    Id = e.MarcoId,
+                    Lat = e.MarcoLat,
+                    Lon = e.MarcoLon
 
-        //    //switch (resultadoDominio.OrdemNome)
-        //    //{
-        //    //    case "EsporteId":
-        //    //        resultado.OrdemNome = "Id";
-        //    //        break;
-        //    //    case "EsporteNome":
-        //    //        resultado.OrdemNome = "Nome";
-        //    //        break;
-        //    //}
+                }),
+                OrdemDirecao = resultadoDominio.OrdemDirecao
+            };
 
-        //    throw new NotImplementedException();
-
-        //}
+            switch (resultadoDominio.OrdemNome)
+            {
+                case "MarcoId":
+                    resultado.OrdemNome = "Id";
+                    break;
+                case "MarcoLat":
+                    resultado.OrdemNome = "Lat";
+                    break;
+                case "MarcoLon":
+                    resultado.OrdemNome = "Lon";
+                    break;
+            }
+            return resultado;        
+        }
 
         public Task<List<MarcoApp>> ListarAsync()
         {
@@ -203,11 +210,7 @@ namespace SportsPromo.App.Core.Manipuladores
         {
             throw new NotImplementedException();
         }
-
-        public Task<PaginadoOrdenado<MarcoApp>> ListarAsync(PaginadoOrdenado<MarcoApp> consulta)
-        {
-            throw new NotImplementedException();
-        }
+              
     }
 
 }

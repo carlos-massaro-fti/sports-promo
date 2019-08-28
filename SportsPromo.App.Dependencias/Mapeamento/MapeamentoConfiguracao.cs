@@ -18,6 +18,7 @@ namespace SportsPromo.App.Dependencias.Mapeamento
             {
                 EsporteMapeamento.Configure(cfg);
                 GeneroMapeamento.Configure(cfg);
+                MarcoMapeamento.Configure(cfg);
             });
             container.RegisterInstance<IMapper>(new Mapper(configuracao));
         }

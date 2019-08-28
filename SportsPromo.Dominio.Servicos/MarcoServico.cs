@@ -128,9 +128,11 @@ namespace SportsPromo.Dominio.Servicos
             throw new NotImplementedException();
         }
 
-        public Task<PaginadoOrdenado<Marco>> ListarAsync(PaginadoOrdenado<Marco> consulta)
+        public async Task<PaginadoOrdenado<Marco>> ListarAsync(PaginadoOrdenado<Marco> consulta)
         {
-            throw new NotImplementedException();
+            var result = await MarcoRepositorio.ListarAsync(consulta);
+
+            return result;
         }
 
         public Task<bool> DeletarAsync(long id)

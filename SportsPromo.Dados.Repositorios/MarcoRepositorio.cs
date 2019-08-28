@@ -165,11 +165,7 @@ namespace SportsPromo.Dados.Repositorios
             throw new NotImplementedException();
         }
 
-        public Task<PaginadoOrdenado<Esporte>> ListarAsync(PaginadoOrdenado<Esporte> consulta)
-        {
-            throw new NotImplementedException();
-        }
-
+       
         public Task<Marco> PegarAsync(long id)
         {
             throw new NotImplementedException();

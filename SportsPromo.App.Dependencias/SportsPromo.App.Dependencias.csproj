@@ -57,6 +57,7 @@
     <Compile Include="Injecao\Manipuladores\ConfigureManipulador.cs" />
     <Compile Include="Mapeamento\Configuracao\EsporteMapeamento.cs" />
     <Compile Include="Mapeamento\Configuracao\GeneroMapeamento.cs" />
+    <Compile Include="Mapeamento\Configuracao\MarcoMapeamento.cs" />
     <Compile Include="Mapeamento\MapeamentoConfiguracao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
