@@ -10,9 +10,9 @@ namespace SportsPromo.App.WebSiteAdm.Controllers
 {
     public class ReceptorController : Controller
     {
-        public ActionResult OnePage()
+        public ActionResult Index()
         {
-            return View();
+            return View("OnePage");
         }
     }
 }
