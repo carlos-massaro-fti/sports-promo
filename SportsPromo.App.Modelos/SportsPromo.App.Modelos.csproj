@@ -42,13 +42,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CategoriaApp.cs" />
     <Compile Include="ChecagemApp.cs" />
     <Compile Include="EsporteApp.cs" />
     <Compile Include="GeneroApp.cs" />
     <Compile Include="MarcoApp.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Prova.cs" />
-    <Compile Include="Receptor.cs" />
+    <Compile Include="ReceptorApp.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SportsPromo.Dominio.Modelos\SportsPromo.Dominio.Modelos.csproj">
+      <Project>{5B4F9D03-7AAC-430C-9D97-7C579E0B892D}</Project>
+      <Name>SportsPromo.Dominio.Modelos</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

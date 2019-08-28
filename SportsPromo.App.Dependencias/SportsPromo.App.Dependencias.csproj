@@ -55,9 +55,11 @@
   <ItemGroup>
     <Compile Include="Injecao\ConfigureTodos.cs" />
     <Compile Include="Injecao\Manipuladores\ConfigureManipulador.cs" />
+    <Compile Include="Mapeamento\Configuracao\CategoriaMapeamento.cs" />
     <Compile Include="Mapeamento\Configuracao\ChecagemMapeamento.cs" />
     <Compile Include="Mapeamento\Configuracao\EsporteMapeamento.cs" />
     <Compile Include="Mapeamento\Configuracao\GeneroMapeamento.cs" />
+    <Compile Include="Mapeamento\Configuracao\ReceptorMapeamento.cs" />
     <Compile Include="Mapeamento\MapeamentoConfiguracao.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

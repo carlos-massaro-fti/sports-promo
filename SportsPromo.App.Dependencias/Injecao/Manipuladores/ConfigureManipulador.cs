@@ -17,6 +17,7 @@ namespace SportsPromo.App.Dependencias.Manipuladores
         {
             container.RegisterType<IGeneroManipulador, GeneroManipulador>(new HierarchicalLifetimeManager());
             container.RegisterType<IEsporteManipulador, EsporteManipulador>(new HierarchicalLifetimeManager());
+            container.RegisterType<IReceptorManipulador, ReceptorManipulador>(new HierarchicalLifetimeManager());
             container.RegisterType<IChecagemManipulador, ChecagemManipulador>(new HierarchicalLifetimeManager());
         }
     }
