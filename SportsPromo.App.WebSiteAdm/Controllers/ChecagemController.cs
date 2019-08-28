@@ -1,4 +1,8 @@
-﻿using System;
+﻿using SportsPromo.App.Interfaces.Manipuladores;
+using SportsPromo.App.Modelos;
+using SportsPromo.Comum.Dados;
+using SportsPromo.Comum.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -8,7 +12,7 @@ using System.Web.Mvc;
 
 namespace SportsPromo.App.WebSiteAdm.Controllers
 {
-    public class ReceptorController : Controller
+    public class ChecagemController : Controller
     {
         public ActionResult Index()
         {

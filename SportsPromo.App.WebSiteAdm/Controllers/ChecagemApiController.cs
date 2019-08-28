@@ -13,11 +13,11 @@ using System.Web.Http.Description;
 
 namespace SportsPromo.App.WebSiteAdm.Controllers
 {
-    public class ApiChecagemController : ApiController
+    public class ChecagemApiController : ApiController
     {
         protected readonly IChecagemManipulador ChecagemManipulador;
 
-        public ApiChecagemController(IChecagemManipulador checagemManipulador)
+        public ChecagemApiController(IChecagemManipulador checagemManipulador)
         {
             ChecagemManipulador = checagemManipulador;
         }
@@ -150,7 +150,7 @@ namespace SportsPromo.App.WebSiteAdm.Controllers
                             ModelState.AddModelError(localName, e.ErrorMessage);
                         }
                     });
-                    ModelState.AddModelError(string.Empty, "Problemas ao Alterar!");
+                    ModelState.AddModelError(string.Empty, "Problemas na Inserção!");
                 }
             }
             return InternalServerError();

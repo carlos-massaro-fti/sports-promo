@@ -5,23 +5,23 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create", "Receptor")
+    @Html.ActionLink("Create New", "Create", "Checagem")
 </p>
 @*<script>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                     @Html.ActionLink("Details", "Details", new { id = item.Id }) |
                     @Html.ActionLink("Delete", "Delete", new { id = item.Id })
 
     </script>*@
 
-<table class="table" id="tabela-receptor">
+<table class="table" id="tabela-checagem">
     <thead>
         <tr>
             <th data-key="Id" data-sort="true">
                 Id
             </th>
-            <th data-key="Codigo" data-sort="true">
-                Codigo
+            <th data-key="Rfid" data-sort="true">
+                Rfid
             </th>
             <th>
                 Personalizada
@@ -32,7 +32,7 @@
     <tbody>
     </tbody>
 </table>
-<nav aria-label="Page navigation" id="tabela-receptor-paginador"></nav>
+<nav aria-label="Page navigation" id="tabela-checagem-paginador"></nav>
 
 @section Scripts {
     @Scripts.Render("~/Scripts/GridJs.js")
@@ -40,7 +40,7 @@
     <script>
             $(document).ready(function () {
                 var gridOptions = {
-                    Url: "http://localhost:44331/api/receptorapi/index/",
+                    Url: "https://localhost:44331/api/apichecagem/index/",
                     Colunas: [
                         {
                             NomeDoCampo: "Id",
@@ -51,18 +51,18 @@
                                 return celula;
                             }
                         },
-                        "Codigo",
+                        "Rfid",
                         {
                             CallbackDeRenderizacao: function (itemLinha, atributoColuna) {
-                                var texto = `${itemLinha.Id} - ${itemLinha.Nome}`;
+                                var texto = `${itemLinha.Id} - ${itemLinha.Rfid}`;
                                 var celula = $("<td />").addClass("text-right").append(texto);
                                 return celula;
                             }
                         }
                     ],
-                    ConteinerDoPaginador: "#tabela-receptor-paginador"
+                    ConteinerDoPaginador: "#tabela-checagem-paginador"
                 };
-                SetupGrid("#tabela-receptor", gridOptions);
+                SetupGrid("#tabela-checagem", gridOptions);
             });
 
 

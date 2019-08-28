@@ -170,9 +170,13 @@ namespace SportsPromo.App.Core.Manipuladores
             throw new NotImplementedException();
         }
 
-        public Task<bool> AlterarAsync(ChecagemApp instancia)
+        public async Task<bool> AlterarAsync(ChecagemApp instancia)
         {
-            throw new NotImplementedException();
+            var instanciaDominio = Mapper.Map<Checagem>(instancia);
+
+            var resultado = await ChecagemServico.AlterarAsync(instanciaDominio);
+
+            return resultado;
         }
 
         public async Task<long> AdicionarAsync(ChecagemApp instancia)

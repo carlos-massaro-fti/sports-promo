@@ -158,9 +158,11 @@ namespace SportsPromo.Dados.Repositorios
             throw new NotImplementedException();
         }
 
-        public Task<Checagem> PegarAsync(long id)
+        public async Task<Checagem> PegarAsync(long id)
         {
-            throw new NotImplementedException();
+            var resultado = await Contexto.Checagems.FindAsync(id);
+
+            return resultado;
         }
     }
 }
