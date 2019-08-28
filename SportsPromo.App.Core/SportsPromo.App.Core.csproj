@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Manipuladores\CategoriaManipulador.cs" />
     <Compile Include="Manipuladores\ChecagemManipulador.cs" />
     <Compile Include="Manipuladores\EsporteManipulador.cs" />
     <Compile Include="Manipuladores\GeneroManipulador.cs" />
