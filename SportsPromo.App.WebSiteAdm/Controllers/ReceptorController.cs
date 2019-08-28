@@ -124,8 +124,53 @@ namespace SportsPromo.App.WebSiteAdm.Controllers
         }
 
         // PUT: api/Receptor/5
-        public void Put(int id, [FromBody]string value)
+        [ResponseType(typeof(void))]
+        public async Task<IHttpActionResult> Put([FromUri] long id ,  ReceptorApp receptorApp)
         {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    receptorApp.Id = id;
+
+                    var resultado = await ReceptorManipulador.AlterarAsync(receptorApp);
+                    if (resultado == true)
+                    {
+                        var resultadoModel = await ReceptorManipulador.PegarAsync(receptorApp.Id);
+                        return Ok(resultadoModel);
+                    }
+                }
+                catch (AppException ex)
+                {
+                    ex.ValidationResults.ToList().ForEach(e =>
+                    {
+                        var localName = string.Empty;
+
+                        if (e.MemberNames.Any())
+                        {
+                            var memberName = e.MemberNames.First();
+                            switch (memberName)
+                            {
+                                case "ReceptorCodigo":
+                                    localName = "Codigo";
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }
+                        if (string.IsNullOrEmpty(localName))
+                        {
+                            ModelState.AddModelError(string.Empty, e.ErrorMessage);
+                        }
+                        else
+                        {
+                            ModelState.AddModelError(localName, e.ErrorMessage);
+                        }
+                    });
+                    ModelState.AddModelError(string.Empty, "Problemas ao Alterar!");
+                }
+            }
+            return InternalServerError();
         }
 
         // DELETE: api/Receptor/5
