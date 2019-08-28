@@ -202,7 +202,7 @@
     <Compile Include="App_Start\UnityMvcActivator.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\CategoriaController.cs" />
+    <Compile Include="Controllers\CategoriaApiController.cs" />
     <Compile Include="Controllers\ChecagemApiController.cs" />
     <Compile Include="Controllers\MarcoApiController.cs" />
     <Compile Include="Controllers\EsporteApiController.cs" />

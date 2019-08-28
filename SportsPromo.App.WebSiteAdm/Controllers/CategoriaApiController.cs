@@ -15,10 +15,10 @@ using SportsPromo.Comum.Helpers;
 
 namespace SportsPromo.App.WebSiteAdm.Controllers
 {
-    public class CategoriaController : Controller
+    public class CategoriaApiController : Controller
     {
         protected readonly ICategoriaManipulador CategoriaManipulador;
-        public CategoriaController(ICategoriaManipulador categoriaManipulador)
+        public CategoriaApiController(ICategoriaManipulador categoriaManipulador)
         {
             CategoriaManipulador = categoriaManipulador;
         }

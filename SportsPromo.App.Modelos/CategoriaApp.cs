@@ -1,4 +1,6 @@
-﻿namespace SportsPromo.App.Core.Modelos
+﻿using SportsPromo.Dominio.Modelos;
+
+namespace SportsPromo.App.Core.Modelos
 {
     public class CategoriaApp
     {
@@ -10,5 +12,8 @@
         public int IdadeMin { get; set; }
         [System.ComponentModel.DataAnnotations.Display(Name = "Idade Maxima")]
         public int IdadeMax { get; set; }
+
+        public Genero Genero { get; set; }
+
     }
 }
