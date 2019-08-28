@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace SportsPromo.App.WebSiteAdm.Controllers
 {
-    public class ReceptorController : ApiController
+    public class ReceptorController : Controller
     {
         public ActionResult OnePage()
         {
