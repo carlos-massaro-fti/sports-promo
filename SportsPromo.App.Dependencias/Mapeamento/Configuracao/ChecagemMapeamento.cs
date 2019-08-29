@@ -16,11 +16,15 @@ namespace SportsPromo.App.Dependencias.Mapeamento.Configuracao
         {
             configurador.CreateMap<ChecagemApp, Checagem>()
                 .ForMember(src => src.ChecagemId, dest => dest.MapFrom(e => e.Id))
-                .ForMember(src => src.ChecagemRfid, dest => dest.MapFrom(e => e.Rfid));
+                .ForMember(src => src.ChecagemRfid, dest => dest.MapFrom(e => e.Rfid))
+                .ForMember(src => src.ChecagemEm, dest => dest.MapFrom(e => e.ChecadoEm))
+                ;
 
             configurador.CreateMap<Checagem, ChecagemApp>()
                 .ForMember(src => src.Id, dest => dest.MapFrom(e => e.ChecagemId))
-                .ForMember(src => src.Rfid, dest => dest.MapFrom(e => e.ChecagemRfid));
+                .ForMember(src => src.Rfid, dest => dest.MapFrom(e => e.ChecagemRfid))
+                .ForMember(src => src.ChecadoEm, dest => dest.MapFrom(e => e.ChecagemEm))
+                ;
         }
     }
 }

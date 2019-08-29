@@ -69,7 +69,7 @@ namespace SportsPromo.App.WebSiteAdm.Controllers
             return Ok(resultado);
         }
 
-     
+
         // POST: api/EsporteApps
         [HttpPost]
         [ResponseType(typeof(ChecagemApp))]
@@ -117,7 +117,8 @@ namespace SportsPromo.App.WebSiteAdm.Controllers
                     ModelState.AddModelError(string.Empty, "Problemas na Inserção!");
                 }
             }
-            return InternalServerError();
+            var contentResult = new System.Web.Http.Results.ResponseMessageResult(Request.CreateResponse(HttpStatusCode.InternalServerError, ModelState));
+            return contentResult;
         }
 
         // DELETE: api/EsporteApps/5
@@ -184,7 +185,8 @@ namespace SportsPromo.App.WebSiteAdm.Controllers
                     ModelState.AddModelError(string.Empty, "Problemas ao Alterar!");
                 }
             }
-            return InternalServerError();
+            var contentResult = new System.Web.Http.Results.ResponseMessageResult(Request.CreateResponse(HttpStatusCode.InternalServerError, ModelState));
+            return contentResult;
         }
     }
 }
