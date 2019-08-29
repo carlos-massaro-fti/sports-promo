@@ -69,43 +69,7 @@ namespace SportsPromo.App.WebSiteAdm.Controllers
             return Ok(resultado);
         }
 
-        // PUT: api/EsporteApps/5
-        [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutChecagemApp(long id, ChecagemApp checagemApp)
-        {
-            throw new NotImplementedException();
-            /*
-                        if (!ModelState.IsValid)
-                        {
-                            return BadRequest(ModelState);
-                        }
-
-                        if (id != checagemApp.Id)
-                        {
-                            return BadRequest();
-                        }
-
-                        db.Entry(checagemApp).State = EntityState.Modified;
-
-                        try
-                        {
-                            await db.SaveChangesAsync();
-                        }
-                        catch (DbUpdateConcurrencyException)
-                        {
-                            if (!EsporteAppExists(id))
-                            {
-                                return NotFound();
-                            }
-                            else
-                            {
-                                throw;
-                            }
-                        }
-                        */
-            return StatusCode(HttpStatusCode.NoContent);
-        }
-
+     
         // POST: api/EsporteApps
         [HttpPost]
         [ResponseType(typeof(ChecagemApp))]

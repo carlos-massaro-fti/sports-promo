@@ -100,24 +100,24 @@
 
         });
         function ExibeFormularioEdicao(itemId) {
-            $.ajax("http://localhost:44331/api/apichecagem/get/", {
+            $.ajax("http://localhost:44331/api/ChecagemApi/get/", {
                 method: "GET",
                 data: { id: itemId }
             }).done(function (response, textStatus, jqXHR) {
                 var modalChecagem = $("#modal-checagem");
                 $("#checagemId").val(response.Id);
-                $("#checagemNome").val(response.Rfid);
+                $("#checagemRfid").val(response.Rfid);
                 modalChecagem.modal('show');
             });
         };
 
         function SalvarChecagem() {
 
-            var putUrl = "http://localhost:44331/api/apichecagem/put/?id=";
+            var putUrl = "http://localhost:44331/api/ChecagemApi/put/?id=";
 
             var checagemItem = {
                 Id: $("#checagemId").val(),
-                Nome: $("#checagemNome").val(),
+                Rfid: $("#checagemRfid").val(),
             }
 
             $.ajax(putUrl + checagemItem.Id, {

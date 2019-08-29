@@ -98,7 +98,7 @@
                 ConteinerDoPaginador: "#tabela-receptor-paginador"
             };
             esporteGrid = SetupGrid("#tabela-receptor", gridOptions);
-            $("#salvarReceptor").on("click", function () { SalvarRecptor() });
+            $("#salvarReceptor").on("click", function () { SalvarReceptor() });
 
         });
         function ExibeFormularioEdicao(itemId) {
@@ -119,7 +119,7 @@
 
             var receptorItem = {
                 Id: $("#receptorId").val(),
-                Nome: $("#receptorCodigo").val(),
+                Codigo: $("#receptorCodigo").val(),
             }
 
             $.ajax(putUrl + receptorItem.Id, {
