@@ -34,36 +34,103 @@
 </table>
 <nav aria-label="Page navigation" id="tabela-receptor-paginador"></nav>
 
+<!-- Modal -->
+<div class="modal fade" id="modal-receptor" tabindex="-1" role="dialog" aria-labelledby="modal-receptor-label">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modal-receptor-label">Alteração de Código do Receptor</h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="receptorId" value="0" />
+                <div class="form-group">
+                    <label for="receptorCodigo">Codigo</label>
+                    <input type="text" class="form-control" id="receptorCodigo" placeholder="Código do Receptor">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" id="salvarReceptor">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 @section Scripts {
     @Scripts.Render("~/Scripts/GridJs.js")
 
     <script>
-            $(document).ready(function () {
-                var gridOptions = {
-                    Url: "http://localhost:44331/api/receptorapi/index/",
-                    Colunas: [
-                        {
-                            NomeDoCampo: "Id",
-                            AtributosHtml: "",
-                            CallbackDeRenderizacao: function (itemLinha, atributoColuna) {
-                                var texto = itemLinha[atributoColuna];
-                                var celula = $("<td />").addClass("text-right").append(texto);
-                                return celula;
-                            }
-                        },
-                        "Codigo",
-                        {
-                            CallbackDeRenderizacao: function (itemLinha, atributoColuna) {
-                                var texto = `${itemLinha.Id} - ${itemLinha.Nome}`;
-                                var celula = $("<td />").addClass("text-right").append(texto);
-                                return celula;
-                            }
+        var esporteGrid;
+        $(document).ready(function () {
+            var gridOptions = {
+                Url: "http://localhost:44331/api/receptorapi/index/",
+                Colunas: [
+                    {
+                        NomeDoCampo: "Id",
+                        AtributosHtml: "",
+                        CallbackDeRenderizacao: function (itemLinha, atributoColuna) {
+                            var texto = itemLinha[atributoColuna];
+                            var celula = $("<td />").addClass("text-right").append(texto);
+                            return celula;
                         }
-                    ],
-                    ConteinerDoPaginador: "#tabela-receptor-paginador"
-                };
-                SetupGrid("#tabela-receptor", gridOptions);
+                    },
+                    "Codigo",
+                    {
+                        CallbackDeRenderizacao: function (itemLinha, atributoColuna) {
+
+                            var texto = `${itemLinha.Id} - ${itemLinha.Codigo}`;
+
+                            var linkEdicao = $("<a/>")
+                                .attr("href", "javascript:;")
+                                .addClass("btn btn-primary")
+                                .append("Editar")
+                                .on("click", function () {
+                                    ExibeFormularioEdicao(itemLinha.Id);
+                                });
+                            var celula = $("<td />").addClass("text-right").append(linkEdicao);
+
+                            return celula;
+                        }
+                    }
+                ],
+                ConteinerDoPaginador: "#tabela-receptor-paginador"
+            };
+            esporteGrid = SetupGrid("#tabela-receptor", gridOptions);
+            $("#salvarReceptor").on("click", function () { SalvarRecptor() });
+
+        });
+        function ExibeFormularioEdicao(itemId) {
+            $.ajax("http://localhost:44331/api/receptorapi/get/", {
+                method: "GET",
+                data: { id: itemId }
+            }).done(function (response, textStatus, jqXHR) {
+                var modalReceptor = $("#modal-receptor");
+                $("#receptorId").val(response.Id);
+                $("#receptorCodigo").val(response.Codigo);
+                modalReceptor.modal('show');
             });
+        };
+
+        function SalvarReceptor() {
+
+            var putUrl = "http://localhost:44331/api/receptorapi/put/?id=";
+
+            var receptorItem = {
+                Id: $("#receptorId").val(),
+                Nome: $("#receptorCodigo").val(),
+            }
+
+            $.ajax(putUrl + receptorItem.Id, {
+                method: "PUT",
+                data: receptorItem
+            }).done(function (response, textStatus, jqXHR) {
+                receptorGrid.Recarregar();
+                var modalReceptor = $("#modal-receptor");
+                modalReceptor.modal('hide');
+            });
+        }
 
 
     </script>
