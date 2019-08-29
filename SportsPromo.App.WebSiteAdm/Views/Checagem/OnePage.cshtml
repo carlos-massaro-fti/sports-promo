@@ -77,8 +77,18 @@
                     "Rfid",
                     {
                         CallbackDeRenderizacao: function (itemLinha, atributoColuna) {
-                            var texto = `${itemLinha.Id} - ${itemLinha.Rfid}`;
-                            var celula = $("<td />").addClass("text-right").append(texto);
+
+                            var texto = `${itemLinha.Id} - ${itemLinha.Nome}`;
+
+                            var linkEdicao = $("<a/>")
+                                .attr("href", "javascript:;")
+                                .addClass("btn btn-primary")
+                                .append("Editar")
+                                .on("click", function () {
+                                    ExibeFormularioEdicao(itemLinha.Id);
+                                });
+                            var celula = $("<td />").addClass("text-right").append(linkEdicao);
+
                             return celula;
                         }
                     }
