@@ -8,7 +8,7 @@
     @Html.ActionLink("Create New", "Create", "Checagem")
 </p>
 @*<script>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                     @Html.ActionLink("Details", "Details", new { id = item.Id }) |
                     @Html.ActionLink("Delete", "Delete", new { id = item.Id })
 
@@ -29,43 +29,95 @@
             <th></th>
         </tr>
     </thead>
-    <tbody>
-    </tbody>
+    <tbody></tbody>
 </table>
 <nav aria-label="Page navigation" id="tabela-checagem-paginador"></nav>
+
+<!-- Modal -->
+<div class="modal fade" id="modal-checagem" tabindex="-1" role="dialog" aria-labelledby="modal-checagem-label">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modal-esporte-label">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="checagemId" value="0" />
+                <div class="form-group">
+                    <label for="checagemRfid">Rfid</label>
+                    <input type="text" class="form-control" id="checagemRfid" placeholder="Rfid">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" id="salvarEsporte">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 @section Scripts {
     @Scripts.Render("~/Scripts/GridJs.js")
 
     <script>
-            $(document).ready(function () {
-                var gridOptions = {
-                    Url: "http://localhost:44331/api/ChecagemApi/index/",
-                    Colunas: [
-                        {
-                            NomeDoCampo: "Id",
-                            AtributosHtml: "",
-                            CallbackDeRenderizacao: function (itemLinha, atributoColuna) {
-                                var texto = itemLinha[atributoColuna];
-                                var celula = $("<td />").addClass("text-right").append(texto);
-                                return celula;
-                            }
-                        },
-                        "Rfid",
-                        {
-                            CallbackDeRenderizacao: function (itemLinha, atributoColuna) {
-                                var texto = `${itemLinha.Id} - ${itemLinha.Rfid}`;
-                                var celula = $("<td />").addClass("text-right").append(texto);
-                                return celula;
-                            }
+        $(document).ready(function () {
+            var gridOptions = {
+                Url: "http://localhost:44331/api/ChecagemApi/index/",
+                Colunas: [
+                    {
+                        NomeDoCampo: "Id",
+                        AtributosHtml: "",
+                        CallbackDeRenderizacao: function (itemLinha, atributoColuna) {
+                            var texto = itemLinha[atributoColuna];
+                            var celula = $("<td />").addClass("text-right").append(texto);
+                            return celula;
                         }
-                    ],
-                    ConteinerDoPaginador: "#tabela-checagem-paginador"
-                };
-                SetupGrid("#tabela-checagem", gridOptions);
+                    },
+                    "Rfid",
+                    {
+                        CallbackDeRenderizacao: function (itemLinha, atributoColuna) {
+                            var texto = `${itemLinha.Id} - ${itemLinha.Rfid}`;
+                            var celula = $("<td />").addClass("text-right").append(texto);
+                            return celula;
+                        }
+                    }
+                ],
+                ConteinerDoPaginador: "#tabela-checagem-paginador"
+            };
+            checagemGrid = SetupGrid("#tabela-checagem", gridOptions);
+            $("#salvarChecagem").on("click", function () { SalvarChecagem() });
+
+        });
+        function ExibeFormularioEdicao(itemId) {
+            $.ajax("http://localhost:44331/api/apichecagem/get/", {
+                method: "GET",
+                data: { id: itemId }
+            }).done(function (response, textStatus, jqXHR) {
+                var modalChecagem = $("#modal-checagem");
+                $("#checagemId").val(response.Id);
+                $("#checagemNome").val(response.Rfid);
+                modalChecagem.modal('show');
             });
+        };
 
+        function SalvarChecagem() {
 
+            var putUrl = "http://localhost:44331/api/apichecagem/put/?id=";
+
+            var checagemItem = {
+                Id: $("#checagemId").val(),
+                Nome: $("#checagemNome").val(),
+            }
+
+            $.ajax(putUrl + checagemItem.Id, {
+                method: "PUT",
+                data: checagemItem
+            }).done(function (response, textStatus, jqXHR) {
+                checagemGrid.Recarregar();
+                var modalChecagem = $("#modal-checagem");
+                modalChecagem.modal('hide');
+            });
+        }
     </script>
-
 }
