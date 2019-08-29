@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using SportsPromo.Comum.Exceptions;
 using SportsPromo.Comum.Dados;
+using AutoMapper;
 
 namespace SportsPromo.Dominio.Servicos
 {
@@ -122,9 +123,22 @@ namespace SportsPromo.Dominio.Servicos
             throw new NotImplementedException();
         }
 
-        public Task<bool> AlterarAsync(Receptor instancia)
+        public async Task<bool> AlterarAsync(Receptor instancia)
         {
-            throw new NotImplementedException();
+            var atualInstancia = await ReceptorRepositorio.PegarAsync(instancia.ReceptorId);
+
+            Mesclar(atualInstancia, instancia);
+
+            var validationResult = Validar(atualInstancia);
+
+            if (validationResult.Any())
+            {
+                throw new AppException(validationResult.First().ErrorMessage, validationResult);
+            }
+
+            var result = await ReceptorRepositorio.AlterarAsync(atualInstancia);
+
+            return result;
         }
 
         public async Task<long> AdicionarAsync(Receptor instancia)
