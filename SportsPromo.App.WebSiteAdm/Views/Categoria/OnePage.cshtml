@@ -1,0 +1,138 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>OnePage</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", "Categoria")
+</p>
+@*<script>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+
+    </script>*@
+
+<table class="table" id="tabela-categoria">
+    <thead>
+        <tr>
+            <th data-key="Id" data-sort="true">
+                Id
+            </th>
+            <th data-key="Nome" data-sort="true">
+                Nome
+            </th>
+            <th>
+                Personalizada
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+<nav aria-label="Page navigation" id="tabela-categoria-paginador"></nav>
+
+<!-- Modal -->
+<div class="modal fade" id="modal-categoria" tabindex="-1" role="dialog" aria-labelledby="modal-categoria-label">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modal-categoria-label">Alteração do nome da Categoria</h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="categoiraId" value="0" />
+                <div class="form-group">
+                    <label for="categoriaNome">Categoria</label>
+                    <input type="text" class="form-control" id="categoriaNome" placeholder="Nome da categoria">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" id="salvarCategoria">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/GridJs.js")
+
+    <script>
+        var categoriaGrid;
+        $(document).ready(function () {
+            var gridOptions = {
+                Url: "http://localhost:44331/api/categoriaapi/index/",
+                Colunas: [
+                    {
+                        NomeDoCampo: "Id",
+                        AtributosHtml: "",
+                        CallbackDeRenderizacao: function (itemLinha, atributoColuna) {
+                            var texto = itemLinha[atributoColuna];
+                            var celula = $("<td />").addClass("text-right").append(texto);
+                            return celula;
+                        }
+                    },
+                    "Nome",
+                    {
+                        CallbackDeRenderizacao: function (itemLinha, atributoColuna) {
+
+                            var texto = `${itemLinha.Id} - ${itemLinha.Nome}`;
+
+                            var linkEdicao = $("<a/>")
+                                .attr("href", "javascript:;")
+                                .addClass("btn btn-primary")
+                                .append("Editar")
+                                .on("click", function () {
+                                    ExibeFormularioEdicao(itemLinha.Id);
+                                });
+                            var celula = $("<td />").addClass("text-right").append(linkEdicao);
+
+                            return celula;
+                        }
+                    }
+                ],
+                ConteinerDoPaginador: "#tabela-categoria-paginador"
+            };
+            categoriaGrid = SetupGrid("#tabela-categoria", gridOptions);
+            $("#salvarcategoria").on("click", function () { SalvarCategoria() });
+
+        });
+        function ExibeFormularioEdicao(itemId) {
+            $.ajax("http://localhost:44331/api/categoriaapi/get/", {
+                method: "GET",
+                data: { id: itemId }
+            }).done(function (response, textStatus, jqXHR) {
+                var modalCategoria = $("#modal-categoria");
+                $("#categoriaId").val(response.Id);
+                $("#categoriaNome").val(response.Nome);
+                modalCategoria.modal('show');
+            });
+        };
+
+        function SalvarCategoria() {
+
+            var putUrl = "http://localhost:44331/api/categoriaapi/put/?id=";
+
+            var categoriaItem = {
+                Id: $("#categoriaId").val(),
+                Nome: $("#categoriaNome").val(),
+            }
+
+            $.ajax(putUrl + categoriaItem.Id, {
+                method: "PUT",
+                data: categoriaItem
+            }).done(function (response, textStatus, jqXHR) {
+                categoriaGrid.Recarregar();
+                var modalcategoria = $("#modal-categoria");
+                modalCategoria.modal('hide');
+            });
+        }
+
+
+    </script>
+
+}
