@@ -35,9 +35,13 @@ namespace SportsPromo.Dados.Repositorios
             return instancia.ReceptorId;
         }
 
-        public Task<bool> AlterarAsync(Receptor instancia)
+        public async Task<bool> AlterarAsync(Receptor instancia)
         {
-            throw new NotImplementedException();
+            Contexto.Entry(instancia).State = System.Data.Entity.EntityState.Modified;
+
+            var result = await Contexto.SaveChangesAsync() > 0;
+
+            return result;
         }
 
         public Task<bool> DeletarAsync(long id)
@@ -162,7 +166,7 @@ namespace SportsPromo.Dados.Repositorios
             return resultado;
         }
 
-        public Task<List<Receptor>> ListarAsync()
+        public async Task<List<Receptor>> ListarAsync()
         {
             throw new NotImplementedException();
         }

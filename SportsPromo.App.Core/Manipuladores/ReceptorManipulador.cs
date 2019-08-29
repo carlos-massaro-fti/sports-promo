@@ -170,9 +170,13 @@ namespace SportsPromo.App.Core.Manipuladores
             throw new NotImplementedException();
         }
 
-        public Task<bool> AlterarAsync(ReceptorApp instancia)
+        public async Task<bool> AlterarAsync(ReceptorApp instancia)
         {
-            throw new NotImplementedException();
+            var instanciaDominio = Mapper.Map<Receptor>(instancia);
+
+            var resultado = await ReceptorServico.AlterarAsync(instanciaDominio);
+
+            return resultado;
         }
 
         public async Task<long> AdicionarAsync(ReceptorApp instancia)
