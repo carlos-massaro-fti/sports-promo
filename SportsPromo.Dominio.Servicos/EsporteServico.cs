@@ -122,9 +122,22 @@ namespace SportsPromo.Dominio.Servicos
             throw new NotImplementedException();
         }
 
-        public Task<bool> AlterarAsync(Esporte instancia)
+        public async Task<bool> AlterarAsync(Esporte instancia)
         {
-            throw new NotImplementedException();
+            var atualInstancia = await EsporteRepositorio.PegarAsync(instancia.EsporteId);
+
+            Mesclar(atualInstancia, instancia);
+
+            var validationResult = Validar(atualInstancia);
+
+            if (validationResult.Any())
+            {
+                throw new AppException(validationResult.First().ErrorMessage, validationResult);
+            }
+
+            var result = await EsporteRepositorio.AlterarAsync(atualInstancia);
+
+            return result;
         }
 
         public async Task<long> AdicionarAsync(Esporte instancia)

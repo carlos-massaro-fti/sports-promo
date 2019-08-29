@@ -73,41 +73,54 @@ namespace SportsPromo.App.WebSiteAdm.Controllers
             return Ok(resultado);
         }
 
-        // PUT: api/EsporteApps/5
+        [HttpPut]
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutEsporteApp(long id, EsporteApp esporteApp)
+        public async Task<IHttpActionResult> Put([FromUri] long id, [FromBody] EsporteApp esporteApp)
         {
-            throw new NotImplementedException();
-            /*
-                        if (!ModelState.IsValid)
-                        {
-                            return BadRequest(ModelState);
-                        }
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    esporteApp.Id = id;
 
-                        if (id != esporteApp.Id)
-                        {
-                            return BadRequest();
-                        }
+                    var resultado = await EsporteManipulador.AlterarAsync(esporteApp);
+                    if (resultado == true)
+                    {
+                        var resultadoModel = await EsporteManipulador.PegarAsync(esporteApp.Id);
+                        return Ok(resultadoModel);
+                    }
+                }
+                catch (AppException ex)
+                {
+                    ex.ValidationResults.ToList().ForEach(e =>
+                    {
+                        var localName = string.Empty;
 
-                        db.Entry(esporteApp).State = EntityState.Modified;
-
-                        try
+                        if (e.MemberNames.Any())
                         {
-                            await db.SaveChangesAsync();
-                        }
-                        catch (DbUpdateConcurrencyException)
-                        {
-                            if (!EsporteAppExists(id))
+                            var memberName = e.MemberNames.First();
+                            switch (memberName)
                             {
-                                return NotFound();
-                            }
-                            else
-                            {
-                                throw;
+                                case "EsporteNome":
+                                    localName = "Nome";
+                                    break;
+                                default:
+                                    break;
                             }
                         }
-                        */
-            return StatusCode(HttpStatusCode.NoContent);
+                        if (string.IsNullOrEmpty(localName))
+                        {
+                            ModelState.AddModelError(string.Empty, e.ErrorMessage);
+                        }
+                        else
+                        {
+                            ModelState.AddModelError(localName, e.ErrorMessage);
+                        }
+                    });
+                    ModelState.AddModelError(string.Empty, "Problemas ao Alterar!");
+                }
+            }
+            return InternalServerError();
         }
 
         // POST: api/EsporteApps

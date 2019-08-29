@@ -35,9 +35,13 @@ namespace SportsPromo.Dados.Repositorios
             return instancia.EsporteId;
         }
 
-        public Task<bool> AlterarAsync(Esporte instancia)
+        public async Task<bool> AlterarAsync(Esporte instancia)
         {
-            throw new NotImplementedException();
+            Contexto.Entry(instancia).State = System.Data.Entity.EntityState.Modified;
+
+            var result = await Contexto.SaveChangesAsync() > 0;
+
+            return result;
         }
 
         public Task<bool> DeletarAsync(long id)

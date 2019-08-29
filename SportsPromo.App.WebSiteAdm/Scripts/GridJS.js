@@ -132,4 +132,8 @@
         });
     }
     PegarDados();
+    this.Recarregar = function () {
+        PegarDados({});
+    }
+    return this;
 }
