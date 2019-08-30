@@ -59,7 +59,7 @@ namespace SportsPromo.Dados.Mapeamento
 
             HasMany(e => e.ProvaTemCategorias)
                 .WithRequired(e => e.Prova)
-                .HasForeignKey(e => e.ProvaCategoriaId)
+                .HasForeignKey(e => e.CategoriaProvaId)
                 .WillCascadeOnDelete(false);
         }
     }

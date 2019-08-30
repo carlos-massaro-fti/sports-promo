@@ -12,5 +12,6 @@ namespace SportsPromo.App.Modelos
 
         [System.ComponentModel.DataAnnotations.Display(ShortName = "Rfid", Name = "Rfid")]
         public string Rfid { get; set; }
+        public DateTime ChecadoEm { get; set; }
     }
 }

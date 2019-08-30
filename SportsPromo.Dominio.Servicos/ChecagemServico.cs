@@ -61,6 +61,7 @@ namespace SportsPromo.Dominio.Servicos
         private void Mesclar(Checagem atualInstancia, Checagem novaInstancia)
         {
             atualInstancia.ChecagemRfid = novaInstancia.ChecagemRfid;
+            atualInstancia.ChecagemEm = novaInstancia.ChecagemEm;
         }
 
         public async Task<bool> AlterarAsync(Checagem instancia)
