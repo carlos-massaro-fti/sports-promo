@@ -212,6 +212,7 @@
     <Compile Include="Controllers\GeneroController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\MarcoController.cs" />
     <Compile Include="Controllers\ReceptorApiController.cs" />
     <Compile Include="Controllers\ReceptorController.cs" />
     <Compile Include="Global.asax.cs">
@@ -294,6 +295,7 @@
     <Content Include="Views\Receptor\OnePage.cshtml" />
     <Content Include="Views\Checagem\OnePage.cshtml" />
     <Content Include="Views\Categoria\OnePage.cshtml" />
+    <Content Include="Views\Marco\Onepage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

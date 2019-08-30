@@ -71,40 +71,55 @@ namespace SportsPromo.App.WebSiteAdm.Controllers
         }
 
         // PUT: api/MarcoApps/5
+        [HttpPut]
         [ResponseType(typeof(void))]
-        public async Task<IHttpActionResult> PutMarcoApp(long id, MarcoApp MarcoApp)
+  
+        public async Task<IHttpActionResult> Put([FromUri] long id, [FromBody] MarcoApp marcoApp)
         {
-            throw new NotImplementedException();
-            /*
-                        if (!ModelState.IsValid)
-                        {
-                            return BadRequest(ModelState);
-                        }
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    marcoApp.Id = id;
 
-                        if (id != MarcoApp.Id)
-                        {
-                            return BadRequest();
-                        }
+                    var resultado = await MarcoManipulador.AlterarAsync(marcoApp);
+                    if (resultado == true)
+                    {
+                        var resultadoModel = await MarcoManipulador.PegarAsync(marcoApp.Id);
+                        return Ok(resultadoModel);
+                    }
+                }
+                catch (AppException ex)
+                {
+                    ex.ValidationResults.ToList().ForEach(e =>
+                    {
+                        var localName = string.Empty;
 
-                        db.Entry(MarcoApp).State = EntityState.Modified;
-
-                        try
+                        if (e.MemberNames.Any())
                         {
-                            await db.SaveChangesAsync();
-                        }
-                        catch (DbUpdateConcurrencyException)
-                        {
-                            if (!MarcoAppExists(id))
+                            var memberName = e.MemberNames.First();
+                            switch (memberName)
                             {
-                                return NotFound();
-                            }
-                            else
-                            {
-                                throw;
+                                case "MarcoId":
+                                    localName = "Id";
+                                    break;
+                                default:
+                                    break;
                             }
                         }
-                        
-            return StatusCode(HttpStatusCode.NoContent);*/
+                        if (string.IsNullOrEmpty(localName))
+                        {
+                            ModelState.AddModelError(string.Empty, e.ErrorMessage);
+                        }
+                        else
+                        {
+                            ModelState.AddModelError(localName, e.ErrorMessage);
+                        }
+                    });
+                    ModelState.AddModelError(string.Empty, "Problemas ao Alterar!");
+                }
+            }
+            return InternalServerError();
         }
 
         // POST: api/MarcoApps
