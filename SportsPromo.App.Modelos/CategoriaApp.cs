@@ -13,6 +13,8 @@ namespace SportsPromo.App.Core.Modelos
         [System.ComponentModel.DataAnnotations.Display(Name = "Idade Maxima")]
         public int IdadeMax { get; set; }
 
+        public long GeneroId { get; set; }
+
         public Genero Genero { get; set; }
 
     }

@@ -13,7 +13,18 @@
                     @Html.ActionLink("Delete", "Delete", new { id = item.Id })
 
     </script>*@
+<select multiple id="selectera" style="display:none;">
+    <option value="PR">Paraná</option>
+    <option value="SP">São Paulo</option>
+    <option value="SC">Santa Catarina</option>
+    <option value="AM">Amazonas</option>
+    <option value="AC">Acre</option>
+    <option value="GO">Goiás</option>
+</select>
 
+<div id="meu-combo" class="combo-simples">
+    <div class="combo-texto"></div><a href="javascript:;" class="combo-botao">>></a>
+</div>
 <table class="table" id="tabela-esporte">
     <thead>
         <tr>
@@ -59,9 +70,69 @@
 
 
 @section Scripts {
+
+
     @Scripts.Render("~/Scripts/GridJs.js")
 
     <script>
+        var ComboItens = [];
+        InstalarCombo();
+        function GetSelecionados() {
+            var resultado = [];
+            var combo = $("#meu-combo a.selecionado");
+            combo.each(function () {
+                resultado.push($(this).data("valor"));
+            });
+            return resultado;
+        }
+        function SelecioneComboItem(item) {
+            $(item).toggleClass("selecionado");
+
+            var dataItem = $(item).data("valor");
+
+            var texto = GetSelecionados().map(item => item.texto).sort().join(", ");
+            $(item).parents(".combo-simples").find(".combo-texto").html(texto);
+
+            dataItem.elemento.removeAttr("selected")
+
+            if ($(item).hasClass("selecionado")) {
+                dataItem.elemento.attr("selected", "selected")
+            }
+
+        }
+
+        function ExtrairDados() {
+            $("#selectera option").each(function () {
+
+                ComboItens.push({ valor: $(this).val(), texto: $(this).html(), elemento: $(this) });
+            });
+            return ComboItens;
+        }
+
+        function InstalarCombo() {
+            var combo = $("#meu-combo");
+            var dados = ExtrairDados();
+            var lista = $("<ul/>");
+            dados.forEach(function (item) {
+                var itemLista = $("<li />");
+                var botaoLista = $("<a href=\"javascript:;\">" + item.texto + "</a>");
+                botaoLista.on("click", function () {
+                    SelecioneComboItem(this);
+                });
+                botaoLista.data("valor", item);
+                itemLista.append(botaoLista);
+                lista.append(itemLista);
+            });
+
+            combo.append(lista);
+
+            $(".combo-botao").on("click", function () {
+                combo.toggleClass("aberto");
+            });
+        }
+
+
+
         var esporteGrid;
         $(document).ready(function () {
             var gridOptions = {

@@ -59,10 +59,12 @@
 
 
 @section Scripts {
-    @Scripts.Render("~/Scripts/GridJs.js")
+    @Scripts.Render("~/Scripts/jquery.grid-sport.js")
 
     <script>
+
         var categoriaGrid;
+
         $(document).ready(function () {
             var gridOptions = {
                 Url: "http://localhost:44331/api/categoriaapi/index/",
@@ -97,9 +99,10 @@
                 ],
                 ConteinerDoPaginador: "#tabela-categoria-paginador"
             };
-            categoriaGrid = SetupGrid("#tabela-categoria", gridOptions);
-            $("#salvarcategoria").on("click", function () { SalvarCategoria() });
+            categoriaGrid = $("#tabela-categoria").GridSport(gridOptions);
 
+            //categoriaGrid = SetupGrid("#tabela-categoria", gridOptions);
+            $("#salvarcategoria").on("click", function () { SalvarCategoria() });
         });
         function ExibeFormularioEdicao(itemId) {
             $.ajax("http://localhost:44331/api/categoriaapi/get/", {

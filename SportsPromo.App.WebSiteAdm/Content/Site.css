@@ -22,3 +22,71 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.combo-simples {
+    position: relative;
+    width: 256px;
+    height: 2em;
+}
+
+    .combo-simples .combo-texto {
+        position: absolute;
+        left: 0px;
+        right: 20%;
+        top: 0px;
+        bottom: 0px;
+        display: block;
+    }
+
+    .combo-simples .combo-botao {
+        position: absolute;
+        left: 80%;
+        right: 0px;
+        top: 0px;
+        bottom: 0px;
+        background-color: gray;
+        display: block;
+        text-align: center;
+        text-decoration: none;
+        font-weight: bold;
+        color: black;
+    }
+
+    .combo-simples > ul:last-child {
+        position: absolute;
+        top: 100%;
+        width: 100%;
+        list-style-type: none;
+        padding: 0px;
+        margin: 0px;
+        display: none;
+    }
+
+    .combo-simples.aberto > ul:last-child {
+        display: block;
+    }
+
+    .combo-simples ul li, .combo-simples ul {
+        display: block;
+        padding: 0px;
+        margin: 0px;
+    }
+
+    .combo-simples li > a {
+        display: block;
+        padding: 1em 0.5em;
+        margin: 0px;
+        background-color: antiquewhite;
+    }
+
+        .combo-simples li > a:hover {
+            display: block;
+            padding: 1em 0.5em;
+            margin: 0px;
+            background-color: honeydew;
+        }
+
+        .combo-simples li > a.selecionado {
+            background-color: black;
+            color: white;
+        }

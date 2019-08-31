@@ -134,9 +134,11 @@ namespace SportsPromo.Dominio.Servicos
         {
             throw new NotImplementedException();
         }
-        public Task<Categoria> PegarAsync(long id)
+        public async Task<Categoria> PegarAsync(long id)
         {
-            throw new NotImplementedException();
+            var result = await CategoriaRepositorio.PegarAsync(id);
+
+            return result;
         }
     }
 }

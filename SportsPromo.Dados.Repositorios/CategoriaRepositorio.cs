@@ -10,7 +10,7 @@ using SportsPromo.Interfaces.Dados.Contextos;
 using SportsPromo.Interfaces.Dados.Repositorios;
 namespace SportsPromo.Dados.Repositorios
 {
-    public class CategoriaRepositorio : BaseRepositorio<Categoria> , ICategoriaRepositorio
+    public class CategoriaRepositorio : BaseRepositorio<Categoria>, ICategoriaRepositorio
     {
         public CategoriaRepositorio(ISportsPromoContexto contexto) : base(contexto)
         {
@@ -25,9 +25,13 @@ namespace SportsPromo.Dados.Repositorios
             return instancia.CategoriaId;
         }
 
-        public Task<long> AdicionarAsync(Categoria instancia)
+        public async Task<long> AdicionarAsync(Categoria instancia)
         {
-            throw new NotImplementedException();
+            Contexto.Categorias.Add(instancia);
+
+            await Contexto.SaveChangesAsync();
+
+            return instancia.CategoriaId;
         }
 
         public Task<bool> AlterarAsync(Categoria instancia)
@@ -161,9 +165,10 @@ namespace SportsPromo.Dados.Repositorios
             throw new NotImplementedException();
         }
 
-        public Task<Categoria> PegarAsync(long id)
+        public async Task<Categoria> PegarAsync(long id)
         {
-            throw new NotImplementedException();
+            var resultado = await Contexto.Categorias.FindAsync(id);
+            return resultado;
         }
 
     }

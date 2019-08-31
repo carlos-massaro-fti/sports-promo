@@ -9,7 +9,6 @@ using System.Text;
 using System.Threading.Tasks;
 using SportsPromo.Comum.Exceptions;
 using SportsPromo.Comum.Dados;
-using AutoMapper;
 
 namespace SportsPromo.Dominio.Servicos
 {

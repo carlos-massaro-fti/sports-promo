@@ -16,12 +16,14 @@ namespace SportsPromo.App.Dependencias.Mapeamento.Configuracao
             configurador.CreateMap<CategoriaApp, Categoria>()
                 .ForMember(src => src.CategoriaId, dest => dest.MapFrom(e => e.Id))
                 .ForMember(src => src.CategoriaNome, dest => dest.MapFrom(e => e.Nome))
+                .ForMember(src => src.CategoriaGeneroId, dest => dest.MapFrom(e => e.GeneroId))
                 .ForMember(src => src.CategoriaIdadeMin, dest => dest.MapFrom(e => e.IdadeMin))
                 .ForMember(src => src.CategoriaIdadeMax, dest => dest.MapFrom(e => e.IdadeMax));
 
             configurador.CreateMap<Categoria, CategoriaApp>()
                 .ForMember(src => src.Id, dest => dest.MapFrom(e => e.CategoriaId))
                 .ForMember(src => src.Nome, dest => dest.MapFrom(e => e.CategoriaNome))
+                .ForMember(src => src.GeneroId, dest => dest.MapFrom(e => e.CategoriaGeneroId))
                 .ForMember(src => src.IdadeMin, dest => dest.MapFrom(e => e.CategoriaIdadeMin))
                 .ForMember(src => src.IdadeMax, dest => dest.MapFrom(e => e.CategoriaIdadeMax));
         }
