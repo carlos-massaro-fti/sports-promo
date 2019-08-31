@@ -1,0 +1,171 @@
+﻿
+@{
+    ViewBag.Title = "Onepage";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", "Marco")
+</p>
+@*<script>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+
+    </script>*@
+
+<table class="table" id="tabela-marco">
+    <thead>
+        <tr>
+            <th data-key="Id" data-sort="true">
+                Id
+            </th>
+            <th data-key="Lat" data-sort="true">
+                Latitude
+            </th>
+            <th data-key="Lon" data-sort="true">
+                Longitude
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+<nav aria-label="Page navigation" id="tabela-marco-paginador"></nav>
+
+<!-- Modal -->
+<div class="modal fade" id="modal-marco" tabindex="-1" role="dialog" aria-labelledby="modal-marco-label">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modal-marco-label">Alteração da Latitude do Marco</h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="marcoLat" value="0" />
+                <div class="form-group">
+                    <label for="marcoCodigo">Latitude</label>
+                    <input type="text" class="form-control" id="marcoLatitude" placeholder="Latitude do marco">
+                </div>
+            </div>
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modal-marco-label">Alteração da Longitude do Marco</h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="marcoLon" value="0" />
+                <div class="form-group">
+                    <label for="marcoCodigo">Longitude</label>
+                    <input type="text" class="form-control" id="marcoLongitude" placeholder="Latitude do marco">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" id="salvarmarco">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/Scripts/GridJs.js")
+
+    <script>
+        var esporteGrid;
+        $(document).ready(function () {
+            var gridOptions = {
+                Url: "http://localhost:44331/api/marcoapi/index/",
+                Colunas: [
+                    {
+                        NomeDoCampo: "Id",
+                        AtributosHtml: "",
+                        CallbackDeRenderizacao: function (itemLinha, atributoColuna) {
+                            var texto = itemLinha[atributoColuna];
+                            var celula = $("<td />").addClass("text-right").append(texto);
+                            return celula;
+                        }
+                    },
+                    "Latitude",
+                    {
+                        CallbackDeRenderizacao: function (itemLinha, atributoColuna) {
+
+                            var texto = `${itemLinha.Id} - ${itemLinha.Codigo}`;
+
+                            var linkEdicao = $("<a/>")
+                                .attr("href", "javascript:;")
+                                .addClass("btn btn-primary")
+                                .append("Editar")
+                                .on("click", function () {
+                                    ExibeFormularioEdicao(itemLinha.Id);
+                                });
+                            var celula = $("<td />").addClass("text-right").append(linkEdicao);
+
+                            return celula;
+                        }
+                    },
+                    "Longitude",
+                    {
+                        CallbackDeRenderizacao: function (itemLinha, atributoColuna) {
+
+                            var texto = `${itemLinha.Id} - ${itemLinha.Codigo}`;
+
+                            var linkEdicao = $("<a/>")
+                                .attr("href", "javascript:;")
+                                .addClass("btn btn-primary")
+                                .append("Editar")
+                                .on("click", function () {
+                                    ExibeFormularioEdicao(itemLinha.Id);
+                                });
+                            var celula = $("<td />").addClass("text-right").append(linkEdicao);
+
+                            return celula;
+                        }
+                    }
+                ],
+                ConteinerDoPaginador: "#tabela-marco-paginador"
+            };
+            esporteGrid = SetupGrid("#tabela-marco", gridOptions);
+            $("#salvarmarco").on("click", function () { Salvarmarco() });
+
+        });
+        function ExibeFormularioEdicao(itemId) {
+            $.ajax("http://localhost:44331/api/marcoapi/get/", {
+                method: "GET",
+                data: { id: itemId }
+            }).done(function (response, textStatus, jqXHR) {
+                var modalmarco = $("#modal-marco");
+                $("#marcoId").val(response.Id);
+                $("#marcoLatitude").val(response.Codigo);
+                $("#marcoLongitude").val(response.Codigo);
+                modalmarco.modal('show');
+            });
+        };
+
+        function Salvarmarco() {
+
+            var putUrl = "http://localhost:44331/api/marcoapi/put/?id=";
+
+            var marcoItem = {
+                Id: $("#marcoId").val(),
+                Latitude: $("#marcoLat").val(),
+                Longitude: $("#marcoLon").val(),
+            }
+
+            $.ajax(putUrl + marcoItem.Id, {
+                method: "PUT",
+                data: marcoItem
+            }).done(function (response, textStatus, jqXHR) {
+                marcoGrid.Recarregar();
+                var modalmarco = $("#modal-marco");
+                modalmarco.modal('hide');
+            });
+        }
+
+
+    </script>
+
+}
+
