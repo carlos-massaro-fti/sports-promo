@@ -65,6 +65,7 @@
     <Compile Include="Dominio\Servicos\IProvaServico.cs" />
     <Compile Include="Dominio\Servicos\IGeneroServico.cs" />
     <Compile Include="Dominio\Servicos\IMarcoServico.cs" />
+    <Compile Include="Dominio\Servicos\IReceptor.cs" />
     <Compile Include="Dominio\Servicos\IReceptorServico.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -59,8 +59,7 @@ namespace SportsPromo.Dados.Repositorios
             };
 
             var query = Contexto.Checagems.AsQueryable();
-
-
+            
             resultado.SetTotalDeLinhas(query.Count());
 
             if (consulta.OrdemDirecao == 0)
