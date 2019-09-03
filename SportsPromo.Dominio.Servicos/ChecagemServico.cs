@@ -35,6 +35,13 @@ namespace SportsPromo.Dominio.Servicos
 
         public async Task<long> AdicionarAsync(Checagem instancia)
         {
+            var validationResult = await ValidarAsync(instancia);
+
+            if (validationResult.Any())
+            {
+                throw new AppException(validationResult.First().ErrorMessage, validationResult);
+            }
+
             var resultado = await ChecagemRepositorio.AdicionarAsync(instancia);
 
             return resultado;
@@ -52,7 +59,6 @@ namespace SportsPromo.Dominio.Servicos
             {
                 throw new AppException(validationResult.First().ErrorMessage, validationResult);
             }
-
             var result = ChecagemRepositorio.Alterar(atualInstancia);
 
             return result;
@@ -70,7 +76,7 @@ namespace SportsPromo.Dominio.Servicos
 
             Mesclar(atualInstancia, instancia);
 
-            var validationResult = Validar(atualInstancia);
+            var validationResult = await ValidarAsync(atualInstancia);
 
             if (validationResult.Any())
             {
@@ -152,9 +158,11 @@ namespace SportsPromo.Dominio.Servicos
             }
         }
 
-        public Task<IEnumerable<ValidationResult>> ValidarAsync(Checagem instancia)
+        public async Task<IEnumerable<ValidationResult>> ValidarAsync(Checagem instancia)
         {
-            throw new NotImplementedException();
+            await Task.Yield();
+
+            return Validar(instancia);
         }
     }
 }
