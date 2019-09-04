@@ -71,10 +71,10 @@ namespace SportsPromo.App.Core.Manipuladores
 
             switch (consulta.OrdemNome)
             {
-                case "EquipeNome":
+                case "Nome":
                     consultaDominio.OrdemNome = "EquipeNome";
                     break;
-                case "EquipeId":
+                case "Id":
                     consultaDominio.OrdemNome = "EquipeId";
                     break;
             }
@@ -94,10 +94,10 @@ namespace SportsPromo.App.Core.Manipuladores
             switch (resultadoDominio.OrdemNome)
             {
                 case "EquipeNome":
-                    resultado.OrdemNome = "EquipeNome";
+                    resultado.OrdemNome = "Nome";
                     break;
                 case "EquipeId":
-                    resultado.OrdemNome = "EquipeId";
+                    resultado.OrdemNome = "Id";
                     break;
             }
 

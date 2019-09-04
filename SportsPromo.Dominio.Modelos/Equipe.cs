@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace SportsPromo.Dominio.Modelos
 {
      public class Equipe
-    {
+     {
         public long EquipeId { get; set; }
 
         public string EquipeNome { get; set; }
@@ -19,5 +19,5 @@ namespace SportsPromo.Dominio.Modelos
 
         public virtual List<Inscricao> Inscricoes { get; set; }
 
-    }
+     }
 }
