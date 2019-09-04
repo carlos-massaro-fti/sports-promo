@@ -1,0 +1,195 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", "Equipe")
+</p>
+@*<script>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+
+    </script>*@
+
+<table class="table" id="tabela-equipe">
+    <thead>
+        <tr>
+            <th data-key="Id" data-sort="true">
+                Id
+            </th>
+            <th data-key="Nome" data-sort="true">
+                Nome
+            </th>
+            <th>
+                Personalizada
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+<nav aria-label="Page navigation" id="tabela-equipe-paginador"></nav>
+
+<!-- Modal -->
+<div class="modal fade" id="modal-equipe" tabindex="-1" role="dialog" aria-labelledby="modal-equipe-label">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modal-equipe-label">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="equipeId" value="0" />
+                <div class="form-group">
+                    <label for="equipeNome">Nome</label>
+                    <input type="text" class="form-control" id="equipeNome" placeholder="Nome">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+                <button type="button" class="btn btn-primary" id="salvarEquipe">Salvar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    
+    
+    @Scripts.Render("~/Scripts/GridJs.js")
+
+    <script>
+        var ComboItens = [];
+        InstalarCombo();
+        function GetSelecionados() {
+            var resultado = [];
+            var combo = $("#meu-combo a.selecionado");
+            combo.each(function () {
+                resultado.push($(this).data("valor"));
+            });
+            return resultado;
+        }
+        function SelecioneComboItem(item) {
+            $(item).toggleClass("selecionado");
+
+            var dataItem = $(item).data("valor");
+
+            var texto = GetSelecionados().map(item => item.texto).sort().join(", ");
+            $(item).parents(".combo-simples").find(".combo-texto").html(texto);
+
+            dataItem.elemento.removeAttr("selected")
+
+            if ($(item).hasClass("selecionado")) {
+                dataItem.elemento.attr("selected", "selected")
+            }
+
+        }
+
+        function ExtrairDados() {
+            $("#selectera option").each(function () {
+
+                ComboItens.push({ valor: $(this).val(), texto: $(this).html(), elemento: $(this) });
+            });
+            return ComboItens;
+        }
+
+        function InstalarCombo() {
+            var combo = $("#meu-combo");
+            var dados = ExtrairDados();
+            var lista = $("<ul/>");
+            dados.forEach(function (item) {
+                var itemLista = $("<li />");
+                var botaoLista = $("<a href=\"javascript:;\">" + item.texto + "</a>");
+                botaoLista.on("click", function () {
+                    SelecioneComboItem(this);
+                });
+                botaoLista.data("valor", item);
+                itemLista.append(botaoLista);
+                lista.append(itemLista);
+            });
+
+            combo.append(lista);
+
+            $(".combo-botao").on("click", function () {
+                combo.toggleClass("aberto");
+            });
+        }
+
+
+
+        var esporteGrid;
+        $(document).ready(function () {
+            var gridOptions = {
+                Url: "http://localhost:44331/api/EquipeApi/index/",
+                Colunas: [
+                    {
+                        NomeDoCampo: "Id",
+                        AtributosHtml: "",
+                        CallbackDeRenderizacao: function (itemLinha, atributoColuna) {
+                            var texto = itemLinha[atributoColuna];
+                            var celula = $("<td />").addClass("text-right").append(texto);
+                            return celula;
+                        }
+                    },
+                    "Nome",
+                    {
+                        CallbackDeRenderizacao: function (itemLinha, atributoColuna) {
+
+                            var texto = `${itemLinha.Id} - ${itemLinha.Nome}`;
+
+                            var linkEdicao = $("<a/>")
+                                .attr("href", "javascript:;")
+                                .addClass("btn btn-primary")
+                                .append("Editar")
+                                .on("click", function () {
+                                    ExibeFormularioEdicao(itemLinha.Id);
+                                });
+                            var celula = $("<td />").addClass("text-right").append(linkEdicao);
+
+                            return celula;
+                        }
+                    }
+                ],
+                ConteinerDoPaginador: "#tabela-equipe-paginador"
+            };
+            equipeGrid = SetupGrid("#tabela-equipe", gridOptions);
+            $("#salvarEquipe").on("click", function () { SalvarEquipe() });
+
+        });
+        function ExibeFormularioEdicao(itemId) {
+            $.ajax("http://localhost:44331/api/EquipeApi/get/", {
+                method: "GET",
+                data: { id: itemId }
+            }).done(function (response, textStatus, jqXHR) {
+                var modalEquipe = $("#modal-equipe");
+                $("#equipeId").val(response.Id);
+                $("#equipeNome").val(response.Rfid);
+                modalEquipe.modal('show');
+            });
+        };
+
+        function SalvarEquipe() {
+
+            var putUrl = "http://localhost:44331/api/EquipeApi/put/?id=";
+
+            var equipeItem = {
+                Id: $("#equipeId").val(),
+                Rfid: $("#equipeNome").val(),
+            }
+
+            $.ajax(putUrl + equipeItem.Id, {
+                method: "PUT",
+                data: equipeItem
+            }).done(function (response, textStatus, jqXHR) {
+                equipeGrid.Recarregar();
+                var modalEquipe = $("#modal-equipe");
+                modalEquipe.modal('hide');
+            });
+        }
+    </script>
+}

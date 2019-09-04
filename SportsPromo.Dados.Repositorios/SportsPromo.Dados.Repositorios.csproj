@@ -52,6 +52,7 @@
     <Compile Include="Base\BaseRepositorio.cs" />
     <Compile Include="CategoriaRepositorio.cs" />
     <Compile Include="ChecagemRepositorio.cs" />
+    <Compile Include="EquipeRepositorio.cs" />
     <Compile Include="EsporteRepositorio.cs" />
     <Compile Include="EventoRepositorio.cs" />
     <Compile Include="GeneroRepositorio.cs" />

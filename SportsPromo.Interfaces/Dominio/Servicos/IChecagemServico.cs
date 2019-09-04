@@ -26,6 +26,5 @@ namespace SportsPromo.Interfaces.Dominio.Servicos
         Task<bool> AlterarAsync(Checagem instancia);
         Task<long> AdicionarAsync(Checagem instancia);
         Task<IEnumerable<ValidationResult>> ValidarAsync(Checagem instancia);
-
     }
 }

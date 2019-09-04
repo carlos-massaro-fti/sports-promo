@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="CategoriaServico.cs" />
     <Compile Include="ChecagemServico.cs" />
+    <Compile Include="EquipeServico.cs" />
     <Compile Include="EsporteServico.cs" />
     <Compile Include="EventoServico.cs" />
     <Compile Include="GeneroServico.cs" />

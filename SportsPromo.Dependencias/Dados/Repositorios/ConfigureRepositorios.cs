@@ -21,6 +21,7 @@ namespace SportsPromo.Dependencias.Dados.Repositorios
             container.RegisterType<ICategoriaRepositorio, CategoriaRepositorio>(new HierarchicalLifetimeManager());
             container.RegisterType<IChecagemRepositorio, ChecagemRepositorio>(new HierarchicalLifetimeManager());
             container.RegisterType<IMarcoRepositorio, MarcoRepositorio>(new HierarchicalLifetimeManager());
+            container.RegisterType<IEquipeRepositorio, EquipeRepositorio>(new HierarchicalLifetimeManager());
         }
     }
 }
